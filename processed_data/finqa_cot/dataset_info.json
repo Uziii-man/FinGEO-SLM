@@ -1,0 +1,65 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "pre_text": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "post_text": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "table": {
+      "feature": {
+        "feature": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "_type": "List"
+      },
+      "_type": "List"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "exe_list": {
+      "feature": {
+        "arg1": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "arg2": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "op": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "res": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      "_type": "List"
+    },
+    "formatted_prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}
