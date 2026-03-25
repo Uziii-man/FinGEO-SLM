@@ -107,6 +107,39 @@ The training path now validates and cleans dataset rows before training:
 
 This addresses common data quality issues that degrade training stability and overstate metrics.
 
+## Cloud Execution (Colab and Vast)
+
+All notebooks now include a cloud bootstrap cell that:
+
+- auto-detects platform (`colab`, `vast`, `local`)
+- resolves project root via `FINGEO_PROJECT_ROOT` or common cloud locations
+- switches notebook working directory to the detected project root
+
+### Environment variables
+
+- `FINGEO_PROJECT_ROOT`: absolute path to the repository root (recommended on Vast)
+- `FINGEO_MOUNT_DRIVE`: set to `1` on Colab to mount Google Drive automatically
+
+### Google Colab quick start
+
+1. Open a notebook in Colab.
+2. Clone or copy the repository under `/content/FinGEO-SLM` (or Drive).
+3. Optional: set `%env FINGEO_MOUNT_DRIVE=1` if your repo is in Drive.
+4. Run cells from top to bottom.
+
+### Vast quick start
+
+1. Ensure the repo is available at `/workspace/FinGEO-SLM` (or another path).
+2. Set `FINGEO_PROJECT_ROOT` to your repo root if needed.
+3. Run cells from top to bottom.
+
+### Notebook-specific cloud notes
+
+- `01_data_collection_and_preprocessing.ipynb`: reads FinQA from `data/finQA/train.json` under the detected project root.
+- `02_model_optimization_and_training.ipynb`: CUDA enables true QLoRA; non-CUDA falls back to full precision.
+- `03_evaluation_and_benchmarking.ipynb`: installs `transformers` and `datasets` explicitly for fresh cloud runtimes.
+- `04_geo_search_query.ipynb`: place PDFs in the project root (or adjust file names in the notebook); otherwise fallback corpus is used.
+
 ## Running the benchmark notebook
 
 1. Open 03_evaluation_and_benchmarking.ipynb.
