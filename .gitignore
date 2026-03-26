@@ -205,3 +205,45 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# FinGEO-SLM Project Specific
+# Generated data and outputs
+processed_data/
+fingeo_slm_logs/
+fingeo_slm_outputs/
+fingeo-slm-adapter*/
+runs/
+checkpoints/
+
+# Model weights and training artifacts
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Large data files (optional - uncomment if you don't want to track data)
+# data/
+# *.json
+# *.csv
+# *.parquet
+
+# Weights & Biases
+wandb/
+
+# Old backup files
+README_OLD.md
+*_backup.*

@@ -1,161 +1,237 @@
 # FinGEO-SLM
 
-FinGEO-SLM is a thesis-oriented financial RAG and fine-tuning project with a modular training stack, dataset validation, and benchmark-ready evaluation pipeline.
+A financial AI project for fine-tuning Small Language Models (SLMs) on financial question-answering tasks with RAG (Retrieval-Augmented Generation) and benchmark evaluation.
 
-## Project Layout
+## 🚀 Quick Start
 
-- 01_data_collection_and_preprocessing.ipynb: raw data ingestion and prompt construction.
-- 02_model_optimization_and_training.ipynb: model loading, backend-aware QLoRA/full-precision training, and diagnostics.
-- 03_evaluation_and_benchmarking.ipynb: retrieval, generation, hardware, and ablation benchmarks.
-- 04_geo_search_query.ipynb: document-level search and retrieval demonstrations.
-- src/fingeo_slm/: reusable production-style modules for config, data, modeling, training, and evaluation.
-- configs/experiment.example.json: runtime configuration template.
+### Local MacBook Setup
+```bash
+git clone <your-repo-url>
+cd FinGEO-SLM
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+jupyter notebook
+```
 
-## Thesis-Standard Refactor
+📖 **Detailed Guide**: See [SETUP_LOCAL.md](SETUP_LOCAL.md)
 
-The codebase now follows an industry-style modular split:
+### Vast.ai Cloud GPU Setup
+```bash
+ssh root@<instance-ip> -p <port>
+cd /workspace
+git clone <your-repo-url>
+cd FinGEO-SLM
+pip install -r requirements.txt
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
 
-- src/fingeo_slm/config.py:
-	- RuntimeConfig dataclass
-	- model preset registry (small SLMs and 7B baseline)
-- src/fingeo_slm/data.py:
-	- robust dataset loading from disk
-	- empty-prompt filtering
-	- duplicate-prompt removal to reduce leakage-like repetition
-- src/fingeo_slm/modeling.py:
-	- backend detection-aware model loading
-	- conditional 4-bit QLoRA activation on CUDA
-	- LoRA target discovery and adapter injection
-- src/fingeo_slm/training.py:
-	- backend-safe optimizer and precision configuration
-- src/fingeo_slm/evaluation.py:
-	- retrieval metrics (Recall@K, MRR, Noise Reduction)
-	- faithfulness and exact-match helpers
-	- timing and memory helpers
+📖 **Detailed Guide**: See [SETUP_VASTAI.md](SETUP_VASTAI.md)
 
-## Extended Benchmarking and Evaluation
+## 📁 Project Structure
 
-03_evaluation_and_benchmarking.ipynb includes four benchmark phases backed by FinQA test data:
+```
+FinGEO-SLM/
+├── 01_data_collection_and_preprocessing.ipynb  # Data loading, EDA, and prompt formatting
+├── 02_model_optimization_and_training.ipynb    # Model training with QLoRA/full-precision
+├── 03_evaluation_and_benchmarking.ipynb        # Comprehensive performance evaluation
+├── 04_geo_search_query.ipynb                   # RAG document retrieval demo
+├── data/finQA/                                 # Training datasets (FinQA)
+├── configs/                                    # Configuration templates
+├── requirements.txt                            # Python dependencies
+├── setup.sh / setup.bat                        # Automated setup scripts
+└── QUICKSTART.md                               # Quick start guide
+```
 
-### 1. Retrieval Performance Metrics
+**Note:** All code is self-contained within the notebooks - no external Python modules required!
 
-- Recall@1, Recall@3, Recall@5: checks whether the ground-truth chunk appears in the top K retrieved chunks.
-- Mean Reciprocal Rank (MRR): measures how high the first relevant chunk is ranked.
-- Information Noise Reduction: estimates how much irrelevant context is removed by reranking.
+## 🎯 Usage
 
-### 2. Generative Accuracy and Fidelity
+Run notebooks in order:
 
-- Semantic Share-of-Voice (SSoV): detects whether target entities are surfaced in generated answers.
-- Hallucination Rate / Faithfulness proxy: binary check that generated numeric claims are present in retrieved context.
-- Numerical Exact Match (EM): verifies extracted financial values against ground truth.
+### 1. Data Preprocessing
+```bash
+jupyter notebook 01_data_collection_and_preprocessing.ipynb
+```
+- Loads FinQA dataset
+- Formats data with Chain-of-Thought prompts
+- Performs EDA with 10+ visualizations
+- Token analysis and statistics
+- Saves processed data to `processed_data/`
 
-### 3. Hardware and Edge Efficiency
+**New visualizations:** Dataset size comparison, question/answer length distributions, table size scatter plots, word frequency analysis, token distributions with percentiles
 
-- Time-to-First-Token (TTFT) in milliseconds.
-- Total inference latency per query.
-- Generation throughput in tokens per second.
-- Peak memory utilization (CUDA or MPS if available).
+### 2. Model Training
+```bash
+jupyter notebook 02_model_optimization_and_training.ipynb
+```
+- Loads pre-trained SLM (Phi-3, Qwen, TinyLlama, Mistral)
+- Auto-detects backend and applies QLoRA (4-bit) on CUDA or full-precision on MPS/CPU
+- All code is self-contained in notebook cells
+- Trains on financial Q&A data
+- Comprehensive visualizations: token distributions, parameter breakdowns, training curves
+- Saves adapter to `fingeo-slm-adapter/`
 
-### 4. Ablation Studies
+**New visualizations:** Dataset statistics, enhanced token length distributions, model parameter pie charts, training/validation split comparison, smoothed loss curves with moving averages
 
-- Dense vs Sparse vs Hybrid retrieval comparison.
-- No-reranker vs Cross-Encoder reranking effect.
-- Base SLM proxy vs CoT fine-tuned proxy comparison.
-- SLM vs 7B baseline comparison hook (activate model generation mode for real inference).
+**Configuration**:
+```python
+runtime.model_key = "phi3-mini"  # or "qwen2.5-1.5b", "tinyllama-1.1b", "mistral-7b"
+runtime.max_train_samples = 1000  # Reduce for faster iteration
+runtime.num_train_epochs = 3
+```
 
-## Model Selection and Switching
+### 3. Evaluation
+```bash
+jupyter notebook 03_evaluation_and_benchmarking.ipynb
+```
+Runs comprehensive benchmarks with extensive visualizations:
+- **Retrieval**: Recall@K, MRR, noise reduction
+- **Generation**: Semantic accuracy, hallucination rate, exact match
+- **Hardware**: TTFT, latency, throughput, memory usage
+- **Ablations**: Dense vs sparse retrieval, with/without reranking
 
-You can switch models by setting runtime.model_key in 02_model_optimization_and_training.ipynb and ACTIVE_SLM_KEY in 03_evaluation_and_benchmarking.ipynb.
+**New visualizations:** Enhanced TTFT/SSoV charts, reranker confidence plots, retrieval quality heatmaps, ablation comparison grids (2x2), efficiency metrics comparison, comprehensive results summary
 
-Built-in presets:
+### 4. RAG Demo (Optional)
+```bash
+jupyter notebook 04_geo_search_query.ipynb
+```
+- PDF document loading and chunking
+- BM25 sparse retrieval
+- Query-based document search
+- 10+ visualizations for search analysis
 
-- phi3-mini -> microsoft/Phi-3-mini-4k-instruct
-- qwen2.5-1.5b -> Qwen/Qwen2.5-1.5B-Instruct
-- tinyllama-1.1b -> TinyLlama/TinyLlama-1.1B-Chat-v1.0
-- mistral-7b -> mistralai/Mistral-7B-Instruct-v0.3
+**New visualizations:** Document/page statistics, chunk size distributions, keyword frequency, retrieval score distributions, similarity heatmaps, BM25 decay curves, chunk rank comparisons, length vs score scatter plots, query complexity analysis
 
-You can also pass a direct Hugging Face model ID instead of a preset.
+## 🖥️ Platform Support
 
-## Why QLoRA/4-bit Did Not Work on MacBook
+| Platform | QLoRA (4-bit) | Full Precision | Notes |
+|----------|---------------|----------------|-------|
+| **MacBook (MPS)** | ❌ | ✅ | Use smaller models (1.5B-3B params) |
+| **CUDA GPU** | ✅ | ✅ | Full QLoRA support (recommended) |
+| **CPU** | ❌ | ✅ | Very slow, not recommended |
+| **Google Colab** | ✅ | ✅ | Free T4 GPU (limited runtime) |
+| **Vast.ai** | ✅ | ✅ | Affordable GPU rental |
 
-Root cause:
+### Why No QLoRA on MacBook?
+- `bitsandbytes` (4-bit quantization) is CUDA-only
+- Apple Silicon (MPS) doesn't support it
+- Notebooks automatically fall back to full-precision FP16/FP32
 
-- bitsandbytes 4-bit kernels are CUDA-only.
-- Apple Silicon (MPS) does not support bitsandbytes QLoRA path.
-- The old notebook used a CUDA-only optimizer (paged_adamw_32bit) even on non-CUDA devices.
+## 🎛️ Model Selection
 
-Fixes applied:
+Built-in model presets:
 
-- Automatic backend detection (cuda/mps/cpu).
-- QLoRA enabled only on CUDA.
-- On MPS/CPU: automatic full-precision fallback and AdamW torch optimizer.
-- Explicit runtime logs show whether QLoRA is active.
+| Model | Size | Best For | VRAM |
+|-------|------|----------|------|
+| `tinyllama-1.1b` | 1.1B | MacBook, quick testing | 4-8GB |
+| `qwen2.5-1.5b` | 1.5B | MacBook, balanced performance | 6-10GB |
+| `phi3-mini` | 3.8B | General use, good accuracy | 12-16GB |
+| `mistral-7b` | 7B | Best accuracy, baseline | 20-24GB |
 
-Practical guidance:
+## 📊 Expected Performance
 
-- For real QLoRA thesis experiments: run on NVIDIA CUDA hardware.
-- For MacBook development/debug: use smaller SLM presets (tinyllama-1.1b or qwen2.5-1.5b) and reduced sample size.
+### MacBook M1/M2 (16GB RAM)
+- Model: TinyLlama or Qwen2.5-1.5B
+- Batch size: 1-2
+- Training time: 30-60 min (200 samples)
+- Inference: 10-20 tokens/sec
 
-## Dataset Quality and Training Data Issue
+### CUDA GPU (RTX 3090, 24GB)
+- Model: Phi-3 or Mistral-7B
+- Batch size: 4-8 with QLoRA
+- Training time: 1-2 hours (full dataset)
+- Inference: 30-60 tokens/sec
 
-The training path now validates and cleans dataset rows before training:
+## 🔧 Key Features
 
-- confirms required text column exists
-- removes empty prompts
-- removes exact duplicate prompts
-- creates explicit train/eval split for better scientific reporting
+✅ **Self-Contained Notebooks**: All code is inline - no external Python modules needed
+✅ **Rich Visualizations**: 30+ charts and graphs across all notebooks
+✅ **Automatic Platform Detection**: Detects Colab/Vast/Local and configures accordingly
+✅ **Smart Backend Selection**: QLoRA on CUDA, full-precision on MPS/CPU
+✅ **Data Quality Checks**: Removes empty/duplicate prompts
+✅ **Comprehensive Benchmarks**: Retrieval, generation, hardware, ablations
+✅ **Cloud-Ready**: Works on Colab, vast.ai, and local machines
+✅ **Easy to Share**: Single notebook files can be shared and run independently
 
-This addresses common data quality issues that degrade training stability and overstate metrics.
+## 📦 Dependencies
 
-## Cloud Execution (Colab and Vast)
+Main libraries:
+- `torch` - PyTorch deep learning framework
+- `transformers` - Hugging Face model library
+- `peft` - Parameter-Efficient Fine-Tuning (LoRA)
+- `datasets` - Dataset loading and processing
+- `langchain` - RAG document retrieval
+- `bitsandbytes` - 4-bit quantization (optional, CUDA only)
 
-All notebooks now include a cloud bootstrap cell that:
+See [requirements.txt](requirements.txt) for complete list.
 
-- auto-detects platform (`colab`, `vast`, `local`)
-- resolves project root via `FINGEO_PROJECT_ROOT` or common cloud locations
-- switches notebook working directory to the detected project root
+## 🐛 Troubleshooting
 
-### Environment variables
+### Out of Memory
+```python
+# In notebook 02:
+runtime.per_device_train_batch_size = 1
+runtime.gradient_accumulation_steps = 8
+runtime.max_train_samples = 200
+```
 
-- `FINGEO_PROJECT_ROOT`: absolute path to the repository root (recommended on Vast)
-- `FINGEO_MOUNT_DRIVE`: set to `1` on Colab to mount Google Drive automatically
+### Module Not Found
+```bash
+pip install -r requirements.txt --force-reinstall
+```
 
-### Google Colab quick start
+### CUDA Not Available
+```bash
+# Verify PyTorch installation
+python -c "import torch; print(torch.cuda.is_available())"
 
-1. Open a notebook in Colab.
-2. Clone or copy the repository under `/content/FinGEO-SLM` (or Drive).
-3. Optional: set `%env FINGEO_MOUNT_DRIVE=1` if your repo is in Drive.
-4. Run cells from top to bottom.
+# Reinstall PyTorch with CUDA
+pip install torch --index-url https://download.pytorch.org/whl/cu118
+```
 
-### Vast quick start
+### Notebook Kernel Crashes
+- Reduce model size (use TinyLlama)
+- Reduce batch size and max_train_samples
+- Close other applications
 
-1. Ensure the repo is available at `/workspace/FinGEO-SLM` (or another path).
-2. Set `FINGEO_PROJECT_ROOT` to your repo root if needed.
-3. Run cells from top to bottom.
+## 📚 Dataset Information
 
-### Notebook-specific cloud notes
+### FinQA
+- **Source**: [FinQA Dataset](https://github.com/czyssrs/FinQA)
+- **Size**: 6,251 training examples
+- **Format**: Financial tables + question + reasoning steps + answer
+- **Use**: Fine-tuning SLMs
 
-- `01_data_collection_and_preprocessing.ipynb`: reads FinQA from `data/finQA/train.json` under the detected project root.
-- `02_model_optimization_and_training.ipynb`: CUDA enables true QLoRA; non-CUDA falls back to full precision.
-- `03_evaluation_and_benchmarking.ipynb`: installs `transformers` and `datasets` explicitly for fresh cloud runtimes.
-- `04_geo_search_query.ipynb`: place PDFs in the project root (or adjust file names in the notebook); otherwise fallback corpus is used.
+### FinanceBench
+- **Source**: [PatronusAI/financebench](https://huggingface.co/datasets/PatronusAI/financebench)
+- **Size**: 150 examples
+- **Use**: Evaluation benchmark
 
-## Running the benchmark notebook
+## 🎓 Academic Context
 
-1. Open 03_evaluation_and_benchmarking.ipynb.
-2. Run cells top to bottom.
-3. Set ACTIVE_SLM_KEY and optionally BASELINE_7B_KEY.
-4. Set ENABLE_MODEL_GENERATION = True to run real model-based ablations.
-5. For strict hardware profiling, wrap memory tracking around your full inference call.
+This project follows thesis-standard practices:
+- Modular, reusable code architecture
+- Rigorous data validation and cleaning
+- Comprehensive evaluation metrics
+- Hardware-agnostic design
+- Reproducible experiments
 
-## Running training notebook
+## 📄 License
 
-1. Open 02_model_optimization_and_training.ipynb.
-2. Select runtime.model_key and runtime.max_train_samples.
-3. Run all cells.
-4. Check runtime logs for backend mode:
-	- CUDA: 4-bit QLoRA + LoRA adapters
-	- MPS/CPU: full precision fallback
-5. Saved artifacts:
-	- LoRA path: fingeo-slm-adapter
-	- Full precision fallback path: fingeo-slm-adapter-full
+[Add your license here]
+
+## 🤝 Contributing
+
+[Add contribution guidelines here]
+
+## 📧 Contact
+
+[Add your contact information here]
+
+---
+
+**Ready to start?** Choose your platform and follow the setup guide:
+- 💻 [Local MacBook Setup](SETUP_LOCAL.md)
+- ☁️ [Vast.ai Cloud Setup](SETUP_VASTAI.md)
