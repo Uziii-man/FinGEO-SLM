@@ -1,24 +1,54 @@
 # FinGEO-SLM
 
-A financial AI project for fine-tuning Small Language Models (SLMs) on financial question-answering tasks with RAG (Retrieval-Augmented Generation) and benchmark evaluation.
+**Financial Question Answering with Small Language Models**
+
+A complete thesis-ready framework for fine-tuning Small Language Models (SLMs) on financial question-answering tasks with RAG (Retrieval-Augmented Generation), comprehensive evaluation, and multi-platform support.
+
+---
+
+## 🌟 Key Features
+
+✅ **Self-Contained Notebooks** - All code inline, no external Python modules needed
+✅ **36+ Visualizations** - Comprehensive data exploration and analysis
+✅ **Multi-Platform** - Works on Local MacBook, Google Colab, and Vast.ai
+✅ **Google Drive Integration** - Automatic data persistence on Colab
+✅ **QLoRA Support** - Memory-efficient 4-bit training on CUDA GPUs
+✅ **Thesis-Ready** - Publication-quality experiments and documentation
+✅ **Zero Configuration** - Auto-detects platform and configures itself
+
+---
 
 ## 🚀 Quick Start
 
-### Local MacBook Setup
+### Option 1: Local MacBook
+
 ```bash
 git clone <your-repo-url>
 cd FinGEO-SLM
-python3 -m venv venv
+./setup.sh
 source venv/bin/activate
-pip install -r requirements.txt
 jupyter notebook
 ```
 
-📖 **Detailed Guide**: See [SETUP_LOCAL.md](SETUP_LOCAL.md)
+**Time**: 5 minutes | **Cost**: Free
 
-### Vast.ai Cloud GPU Setup
+📖 [Full Local Setup Guide](SETUP_LOCAL.md)
+
+### Option 2: Google Colab (Recommended for Beginners)
+
+1. Go to [colab.research.google.com](https://colab.research.google.com)
+2. Upload `01_data_collection_and_preprocessing.ipynb`
+3. Runtime → Change runtime type → **T4 GPU**
+4. Runtime → **Run all**
+5. Authorize Google Drive when prompted
+
+**Time**: 2 minutes | **Cost**: Free
+
+📖 [Colab Quick Start](QUICK_START_COLAB.md)
+
+### Option 3: Vast.ai (Best for Production)
+
 ```bash
-ssh root@<instance-ip> -p <port>
 cd /workspace
 git clone <your-repo-url>
 cd FinGEO-SLM
@@ -26,212 +56,180 @@ pip install -r requirements.txt
 jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 ```
 
-📖 **Detailed Guide**: See [SETUP_VASTAI.md](SETUP_VASTAI.md)
+**Time**: 15 minutes | **Cost**: ~$0.35/hour
+
+📖 [Vast.ai Setup](SETUP_VASTAI.md)
+
+---
 
 ## 📁 Project Structure
 
 ```
 FinGEO-SLM/
-├── 01_data_collection_and_preprocessing.ipynb  # Data loading, EDA, and prompt formatting
-├── 02_model_optimization_and_training.ipynb    # Model training with QLoRA/full-precision
-├── 03_evaluation_and_benchmarking.ipynb        # Comprehensive performance evaluation
-├── 04_geo_search_query.ipynb                   # RAG document retrieval demo
-├── data/finQA/                                 # Training datasets (FinQA)
-├── configs/                                    # Configuration templates
-├── requirements.txt                            # Python dependencies
-├── setup.sh / setup.bat                        # Automated setup scripts
-└── QUICKSTART.md                               # Quick start guide
+├── 📓 Notebooks (Self-Contained - 36+ Visualizations)
+│   ├── 01_data_collection_and_preprocessing.ipynb  # 10 visualizations
+│   ├── 02_model_optimization_and_training.ipynb    # 6 visualizations
+│   ├── 03_evaluation_and_benchmarking.ipynb        # 10+ visualizations
+│   └── 04_geo_search_query.ipynb                   # 10 visualizations
+│
+├── 📚 Data
+│   └── data/finQA/                                 # 6,251 training samples
+│
+├── ⚙️ Config & Scripts
+│   ├── requirements.txt
+│   ├── setup.sh / setup.bat
+│   └── configs/
+│
+└── 📖 Documentation
+    ├── README.md                                   # This file
+    ├── QUICKSTART.md                               # 5-min start
+    ├── QUICK_START_COLAB.md                        # Colab guide
+    ├── SETUP_LOCAL.md                              # Local setup
+    ├── SETUP_VASTAI.md                             # Cloud GPU
+    ├── PLATFORM_COMPARISON.md                      # Colab vs Vast.ai
+    ├── THESIS_GUIDE.md                             # Academic workflow
+    └── CHANGELOG.md                                # Project history
 ```
-
-**Note:** All code is self-contained within the notebooks - no external Python modules required!
-
-## 🎯 Usage
-
-Run notebooks in order:
-
-### 1. Data Preprocessing
-```bash
-jupyter notebook 01_data_collection_and_preprocessing.ipynb
-```
-- Loads FinQA dataset
-- Formats data with Chain-of-Thought prompts
-- Performs EDA with 10+ visualizations
-- Token analysis and statistics
-- Saves processed data to `processed_data/`
-
-**New visualizations:** Dataset size comparison, question/answer length distributions, table size scatter plots, word frequency analysis, token distributions with percentiles
-
-### 2. Model Training
-```bash
-jupyter notebook 02_model_optimization_and_training.ipynb
-```
-- Loads pre-trained SLM (Phi-3, Qwen, TinyLlama, Mistral)
-- Auto-detects backend and applies QLoRA (4-bit) on CUDA or full-precision on MPS/CPU
-- All code is self-contained in notebook cells
-- Trains on financial Q&A data
-- Comprehensive visualizations: token distributions, parameter breakdowns, training curves
-- Saves adapter to `fingeo-slm-adapter/`
-
-**New visualizations:** Dataset statistics, enhanced token length distributions, model parameter pie charts, training/validation split comparison, smoothed loss curves with moving averages
-
-**Configuration**:
-```python
-runtime.model_key = "phi3-mini"  # or "qwen2.5-1.5b", "tinyllama-1.1b", "mistral-7b"
-runtime.max_train_samples = 1000  # Reduce for faster iteration
-runtime.num_train_epochs = 3
-```
-
-### 3. Evaluation
-```bash
-jupyter notebook 03_evaluation_and_benchmarking.ipynb
-```
-Runs comprehensive benchmarks with extensive visualizations:
-- **Retrieval**: Recall@K, MRR, noise reduction
-- **Generation**: Semantic accuracy, hallucination rate, exact match
-- **Hardware**: TTFT, latency, throughput, memory usage
-- **Ablations**: Dense vs sparse retrieval, with/without reranking
-
-**New visualizations:** Enhanced TTFT/SSoV charts, reranker confidence plots, retrieval quality heatmaps, ablation comparison grids (2x2), efficiency metrics comparison, comprehensive results summary
-
-### 4. RAG Demo (Optional)
-```bash
-jupyter notebook 04_geo_search_query.ipynb
-```
-- PDF document loading and chunking
-- BM25 sparse retrieval
-- Query-based document search
-- 10+ visualizations for search analysis
-
-**New visualizations:** Document/page statistics, chunk size distributions, keyword frequency, retrieval score distributions, similarity heatmaps, BM25 decay curves, chunk rank comparisons, length vs score scatter plots, query complexity analysis
-
-## 🖥️ Platform Support
-
-| Platform | QLoRA (4-bit) | Full Precision | Notes |
-|----------|---------------|----------------|-------|
-| **MacBook (MPS)** | ❌ | ✅ | Use smaller models (1.5B-3B params) |
-| **CUDA GPU** | ✅ | ✅ | Full QLoRA support (recommended) |
-| **CPU** | ❌ | ✅ | Very slow, not recommended |
-| **Google Colab** | ✅ | ✅ | Free T4 GPU (limited runtime) |
-| **Vast.ai** | ✅ | ✅ | Affordable GPU rental |
-
-### Why No QLoRA on MacBook?
-- `bitsandbytes` (4-bit quantization) is CUDA-only
-- Apple Silicon (MPS) doesn't support it
-- Notebooks automatically fall back to full-precision FP16/FP32
-
-## 🎛️ Model Selection
-
-Built-in model presets:
-
-| Model | Size | Best For | VRAM |
-|-------|------|----------|------|
-| `tinyllama-1.1b` | 1.1B | MacBook, quick testing | 4-8GB |
-| `qwen2.5-1.5b` | 1.5B | MacBook, balanced performance | 6-10GB |
-| `phi3-mini` | 3.8B | General use, good accuracy | 12-16GB |
-| `mistral-7b` | 7B | Best accuracy, baseline | 20-24GB |
-
-## 📊 Expected Performance
-
-### MacBook M1/M2 (16GB RAM)
-- Model: TinyLlama or Qwen2.5-1.5B
-- Batch size: 1-2
-- Training time: 30-60 min (200 samples)
-- Inference: 10-20 tokens/sec
-
-### CUDA GPU (RTX 3090, 24GB)
-- Model: Phi-3 or Mistral-7B
-- Batch size: 4-8 with QLoRA
-- Training time: 1-2 hours (full dataset)
-- Inference: 30-60 tokens/sec
-
-## 🔧 Key Features
-
-✅ **Self-Contained Notebooks**: All code is inline - no external Python modules needed
-✅ **Rich Visualizations**: 30+ charts and graphs across all notebooks
-✅ **Automatic Platform Detection**: Detects Colab/Vast/Local and configures accordingly
-✅ **Smart Backend Selection**: QLoRA on CUDA, full-precision on MPS/CPU
-✅ **Data Quality Checks**: Removes empty/duplicate prompts
-✅ **Comprehensive Benchmarks**: Retrieval, generation, hardware, ablations
-✅ **Cloud-Ready**: Works on Colab, vast.ai, and local machines
-✅ **Easy to Share**: Single notebook files can be shared and run independently
-
-## 📦 Dependencies
-
-Main libraries:
-- `torch` - PyTorch deep learning framework
-- `transformers` - Hugging Face model library
-- `peft` - Parameter-Efficient Fine-Tuning (LoRA)
-- `datasets` - Dataset loading and processing
-- `langchain` - RAG document retrieval
-- `bitsandbytes` - 4-bit quantization (optional, CUDA only)
-
-See [requirements.txt](requirements.txt) for complete list.
-
-## 🐛 Troubleshooting
-
-### Out of Memory
-```python
-# In notebook 02:
-runtime.per_device_train_batch_size = 1
-runtime.gradient_accumulation_steps = 8
-runtime.max_train_samples = 200
-```
-
-### Module Not Found
-```bash
-pip install -r requirements.txt --force-reinstall
-```
-
-### CUDA Not Available
-```bash
-# Verify PyTorch installation
-python -c "import torch; print(torch.cuda.is_available())"
-
-# Reinstall PyTorch with CUDA
-pip install torch --index-url https://download.pytorch.org/whl/cu118
-```
-
-### Notebook Kernel Crashes
-- Reduce model size (use TinyLlama)
-- Reduce batch size and max_train_samples
-- Close other applications
-
-## 📚 Dataset Information
-
-### FinQA
-- **Source**: [FinQA Dataset](https://github.com/czyssrs/FinQA)
-- **Size**: 6,251 training examples
-- **Format**: Financial tables + question + reasoning steps + answer
-- **Use**: Fine-tuning SLMs
-
-### FinanceBench
-- **Source**: [PatronusAI/financebench](https://huggingface.co/datasets/PatronusAI/financebench)
-- **Size**: 150 examples
-- **Use**: Evaluation benchmark
-
-## 🎓 Academic Context
-
-This project follows thesis-standard practices:
-- Modular, reusable code architecture
-- Rigorous data validation and cleaning
-- Comprehensive evaluation metrics
-- Hardware-agnostic design
-- Reproducible experiments
-
-## 📄 License
-
-[Add your license here]
-
-## 🤝 Contributing
-
-[Add contribution guidelines here]
-
-## 📧 Contact
-
-[Add your contact information here]
 
 ---
 
-**Ready to start?** Choose your platform and follow the setup guide:
-- 💻 [Local MacBook Setup](SETUP_LOCAL.md)
-- ☁️ [Vast.ai Cloud Setup](SETUP_VASTAI.md)
+## 🎯 Workflow
+
+### 1️⃣ Data Preprocessing (10 minutes)
+```bash
+jupyter notebook 01_data_collection_and_preprocessing.ipynb
+```
+
+- Loads FinQA dataset (6,251 samples)
+- Applies Chain-of-Thought formatting
+- 10+ visualizations (distributions, statistics)
+- **Colab**: Auto-saves to Google Drive 📁
+
+### 2️⃣ Model Training (30min - 3 hours)
+```bash
+jupyter notebook 02_model_optimization_and_training.ipynb
+```
+
+- Auto-detects platform (CUDA/MPS/CPU)
+- Trains Phi-3, Qwen, TinyLlama, or Mistral
+- QLoRA on CUDA, full-precision on MPS
+- **Colab**: Auto-loads data, saves model to Drive 📁
+
+**Configure**:
+```python
+runtime.model_key = "phi3-mini"       # Model choice
+runtime.max_train_samples = 6203      # Full dataset
+runtime.num_train_epochs = 3          # Epochs
+```
+
+### 3️⃣ Evaluation (30 minutes)
+```bash
+jupyter notebook 03_evaluation_and_benchmarking.ipynb
+```
+
+- Retrieval: Recall@K, MRR
+- Generation: Accuracy, faithfulness
+- Hardware: TTFT, throughput
+- Ablations: Dense vs sparse, reranking
+- **Colab**: Auto-loads everything from Drive 📁
+
+### 4️⃣ RAG Demo (Optional, 15 minutes)
+```bash
+jupyter notebook 04_geo_search_query.ipynb
+```
+
+- PDF loading, chunking, BM25 retrieval
+- 10 visualizations
+
+---
+
+## 🖥️ Platform Support
+
+| Platform | QLoRA | Speed | Cost | Best For |
+|----------|-------|-------|------|----------|
+| **MacBook (MPS)** | ❌ | 1x | Free | Dev, testing |
+| **Colab Free** | ✅ | 3-4x | Free | Learning |
+| **Colab Pro** | ✅ | 4-6x | $10/mo | Convenience |
+| **Vast.ai (RTX 3090)** | ✅ | 5-8x | $0.35/hr | Production ⭐ |
+| **Vast.ai (A100)** | ✅ | 8-12x | $1/hr | Large-scale |
+
+**MacBook Note**: No 4-bit QLoRA (`bitsandbytes` is CUDA-only). Notebooks auto-fall back to full-precision.
+
+---
+
+## 🎓 For Thesis Work
+
+**Complete experimental workflow**:
+
+- **Week 1**: Data prep & initial training
+- **Week 2-3**: Production training (3 models)
+- **Week 4**: Evaluation & documentation
+
+📖 [Complete Guide](THESIS_GUIDE.md) (400+ lines)
+
+**Cost**: $10-30 (hybrid Colab + Vast.ai approach)
+
+---
+
+## 🎛️ Models
+
+| Model | Params | VRAM | Time | Best For |
+|-------|--------|------|------|----------|
+| `tinyllama-1.1b` | 1.1B | 8GB | 30-60min | MacBook, quick tests |
+| `qwen2.5-1.5b` | 1.5B | 10GB | 45-90min | Balanced |
+| `phi3-mini` | 3.8B | 16GB | 2-3hrs | Production ⭐ |
+| `mistral-7b` | 7B | 24GB | 3-4hrs | Best accuracy |
+
+---
+
+## 📊 Visualizations (36+)
+
+| Notebook | Count | Content |
+|----------|-------|---------|
+| 01 - Data | 10 | EDA, distributions, token analysis |
+| 02 - Training | 6 | Parameters, training curves |
+| 03 - Eval | 10+ | Benchmarks, ablations |
+| 04 - RAG | 10 | Retrieval analysis |
+
+---
+
+## 🔧 Troubleshooting
+
+### Out of Memory (MacBook)
+```python
+runtime.model_key = "tinyllama-1.1b"
+runtime.max_train_samples = 200
+runtime.per_device_train_batch_size = 1
+```
+
+### FileNotFoundError (Colab)
+**Solution**: Run "Runtime → Run all" (don't skip cells!)
+
+### Training Too Slow
+Use Vast.ai instead of MacBook for production runs.
+
+---
+
+## 📚 Datasets
+
+- **FinQA**: 6,251 training samples (IBM)
+- **FinanceBench**: 150 eval samples (PatronusAI)
+
+---
+
+## 📞 Support
+
+- 📖 [THESIS_GUIDE.md](THESIS_GUIDE.md) - Academic workflow
+- ☁️ [PLATFORM_COMPARISON.md](PLATFORM_COMPARISON.md) - Colab vs Vast.ai
+- 🚀 [QUICKSTART.md](QUICKSTART.md) - 5-minute intro
+
+---
+
+## 🎉 Getting Started
+
+**New to ML?** → [QUICK_START_COLAB.md](QUICK_START_COLAB.md) (2 min)
+**Have a MacBook?** → [SETUP_LOCAL.md](SETUP_LOCAL.md) (`./setup.sh`)
+**Want production results?** → [SETUP_VASTAI.md](SETUP_VASTAI.md)
+**Writing a thesis?** → [THESIS_GUIDE.md](THESIS_GUIDE.md)
+
+**All notebooks work on all platforms with zero modification!** 🎊

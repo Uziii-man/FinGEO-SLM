@@ -244,6 +244,10 @@ checkpoints/
 # Weights & Biases
 wandb/
 
-# Old backup files
-README_OLD.md
+# Backup files
+*_BACKUP.ipynb
+*_OLD.*
 *_backup.*
+README_NEW.md
+CELL_ADDITIONS_DETAIL.md
+DRIVE_INTEGRATION_SUMMARY.md
