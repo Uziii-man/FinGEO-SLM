@@ -49,25 +49,38 @@ All 4 notebooks now have automatic Google Drive integration. Just open and run -
 
 ## What Happens Automatically
 
+### Smart Project Detection
+The notebooks automatically detect where your project files are located:
+
+**Option 1: If you have FinGEO-SLM folder in Google Drive:**
+- `PROJECT_ROOT` → `/content/drive/MyDrive/FinGEO-SLM`
+- All data saves directly to Drive (no copying needed)
+- Everything is automatically persistent
+
+**Option 2: If you clone the repo to local Colab workspace:**
+- `PROJECT_ROOT` → `/content/FinGEO-SLM`
+- Data is created locally, then backed up to Drive
+- You get both local speed and Drive persistence
+
 ### Notebook 01
 - ✓ Mounts Google Drive
 - ✓ Processes FinQA data
-- ✓ Saves to local workspace
-- ✓ **Copies to Drive** → `/MyDrive/FinGEO-SLM/processed_data/`
+- ✓ Saves data to PROJECT_ROOT/processed_data
+- ✓ **Backs up to Drive** (if PROJECT_ROOT is not already on Drive)
 
 ### Notebook 02
 - ✓ Mounts Google Drive
-- ✓ **Loads data from Drive** if not found locally
+- ✓ **Loads data from Drive** if not found at PROJECT_ROOT
 - ✓ Trains model
-- ✓ **Saves model to Drive** → `/MyDrive/FinGEO-SLM/models/`
-- ✓ **Saves logs to Drive** → `/MyDrive/FinGEO-SLM/logs/`
+- ✓ Saves model to PROJECT_ROOT
+- ✓ **Backs up to Drive** (if PROJECT_ROOT is not already on Drive)
 
 ### Notebook 03
 - ✓ Mounts Google Drive
 - ✓ **Loads data from Drive** if needed
 - ✓ **Loads models from Drive** if available
 - ✓ Runs evaluation
-- ✓ **Saves results to Drive** → `/MyDrive/FinGEO-SLM/results/`
+- ✓ Saves results locally or to Drive
 
 ### Notebook 04
 - ✓ Mounts Google Drive
