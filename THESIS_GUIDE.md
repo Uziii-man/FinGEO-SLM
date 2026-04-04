@@ -691,11 +691,33 @@ Ready to start? Follow this checklist:
 - LoRA: Hu et al. (2021)
 - QLoRA: Dettmers et al. (2023)
 - RAG: Lewis et al. (2020)
+- GEO: Chen et al. (2025)
+- Sentence-BERT: Reimers and Gurevych (2019)
 
 ### Useful Tools
 - TensorBoard: Monitor training in real-time
 - WandB: Experiment tracking (optional)
 - Jupyter nbconvert: Export notebooks to PDF/HTML
+
+---
+
+## 🔄 Thesis Alignment
+
+**IMPORTANT**: Before submitting your thesis, review `THESIS_CHANGES.md` for:
+- Required text updates to match actual implementation
+- Clarifications on algorithm descriptions
+- Results tables that need to be filled in
+
+### Key Implementation Details for Thesis
+
+| Thesis Claim | Actual Implementation |
+|--------------|----------------------|
+| FAISS+BM25 ensemble | ✅ Implemented in Notebook 03 |
+| Cross-encoder reranking | ⚠️ Uses lexical overlap (not neural cross-encoder) |
+| OCR/2D layout parsing | ⚠️ Uses JSON-to-Markdown (not spatial parsing) |
+| GEO visibility metrics | ✅ SSoV, mention frequency implemented |
+| Numerical hallucination | ✅ Implemented in Notebook 03 |
+| Memory profiling | ✅ MemoryProfiler class added |
 
 ---
 
