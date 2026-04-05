@@ -22,7 +22,7 @@ This guide provides a systematic approach to training, testing, and documenting 
 
 ### Environment Options
 
-#### Option A: MacBook (Development & Small-Scale Experiments)
+#### Option A: Vast.ai GPU Instance
 **Best for:** Initial testing, code development, small experiments
 
 ```bash
@@ -32,7 +32,7 @@ cd FinGEO-SLM
 source venv/bin/activate
 
 # Verify setup
-python -c "import torch; print(f'MPS available: {torch.backends.mps.is_available()}')"
+python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
 ```
 
 **Recommended configuration:**
@@ -104,7 +104,7 @@ python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
    ```
 
 #### Expected Time:
-- MacBook: 5-10 minutes
+- Vast.ai: 5-10 minutes
 - Vast.ai: 3-5 minutes
 
 #### Thesis Section:
@@ -158,7 +158,7 @@ runtime.gradient_accumulation_steps = 4
 - [ ] Note training start time
 
 **During Training:**
-- [ ] Monitor GPU/MPS memory usage
+- [ ] Monitor GPU memory usage
 - [ ] Watch training loss curve
 - [ ] Check for OOM errors (reduce batch size if needed)
 
@@ -172,7 +172,7 @@ runtime.gradient_accumulation_steps = 4
 
 | Experiment | Model | Params | Samples | Epochs | Batch | Backend | Time | Final Loss |
 |------------|-------|--------|---------|--------|-------|---------|------|------------|
-| Baseline   | TinyLlama | 1.1B | 1000 | 1 | 4 | MPS/CUDA | [fill] | [fill] |
+| Baseline   | TinyLlama | 1.1B | 1000 | 1 | 4 | CUDA | [fill] | [fill] |
 | Medium     | Qwen2.5 | 1.5B | 3000 | 2 | 4 | CUDA | [fill] | [fill] |
 | Production | Phi-3 | 3.8B | 6203 | 3 | 4 | CUDA | [fill] | [fill] |
 
@@ -180,7 +180,7 @@ runtime.gradient_accumulation_steps = 4
 
 #### Expected Time:
 - **TinyLlama (1000 samples, 1 epoch):**
-  - MacBook M2: ~30-45 minutes
+  - Vast.ai M2: ~30-45 minutes
   - RTX 3090: ~10-15 minutes
 
 - **Phi-3 (6203 samples, 3 epochs):**
@@ -525,7 +525,7 @@ with open('thesis_results/experiment_config.json', 'w') as f:
    - Surprising results
 
 2. **Limitations**
-   - Hardware constraints (if using MacBook for some experiments)
+   - Hardware constraints (if using Vast.ai for some experiments)
    - Dataset limitations
    - Model limitations
 
@@ -652,7 +652,7 @@ Ready to start? Follow this checklist:
 ## 💡 Pro Tips for Thesis Success
 
 1. **Start Small, Scale Up**
-   - Test on MacBook with small samples first
+   - Test on Vast.ai with small samples first
    - Move to cloud GPU for final experiments
    - This saves money and debugging time
 
@@ -726,7 +726,7 @@ Ready to start? Follow this checklist:
 **Q: How many experiments do I need for a thesis?**
 A: Minimum 3 model configurations + 2-3 ablation studies. More is better!
 
-**Q: What if training fails on MacBook?**
+**Q: What if training fails on Vast.ai?**
 A: Reduce batch size to 1, reduce samples to 100-200, or use cloud GPU.
 
 **Q: How do I know if results are significant?**
@@ -747,7 +747,7 @@ If you run into issues:
 1. Check CHANGELOG.md for recent changes
 2. Review inline notebook documentation
 3. Check error messages in training logs
-4. Verify hardware compatibility (MPS vs CUDA)
+4. Verify hardware compatibility (GPU)
 5. Test with smaller configurations first
 
 ---

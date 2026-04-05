@@ -1,121 +1,151 @@
-# Quick Start Guide
+# FinGEO-SLM Quick Start
 
-Get FinGEO-SLM running in 5 minutes.
+**Get up and running in 15 minutes on Vast.ai**
+
+---
 
 ## Prerequisites
-- Python 3.9+
-- 8GB+ RAM (16GB+ recommended)
-- 10GB+ free disk space
 
-## One-Line Setup
+- **GPU Required**: CUDA-capable GPU (RTX 4090/5090 recommended)
+- **Platform**: Vast.ai GPU instance
+- **Budget**: ~$0.35-0.60/hour
 
-### macOS/Linux
+---
+
+## Step 1: Rent Vast.ai GPU (5 minutes)
+
+1. Go to [vast.ai](https://vast.ai)
+2. Search for instances:
+   - **GPU**: RTX 4090 or 5090
+   - **VRAM**: ≥24GB
+   - **Disk**: ≥50GB
+   - **Sort by**: Price (lowest first)
+
+3. Rent instance and SSH in:
 ```bash
+ssh root@<instance-ip> -p <port>
+```
+
+---
+
+## Step 2: Setup (5 minutes)
+
+```bash
+# Navigate to workspace
+cd /workspace
+
+# Clone repository
+git clone <your-repo-url>
+cd FinGEO-SLM
+
+# Run setup script
 ./setup.sh
 ```
 
-### Windows
-```cmd
-setup.bat
+The setup script will:
+- ✅ Validate GPU availability
+- ✅ Install dependencies
+- ✅ Create output directories
+- ✅ Show estimated training time
+
+---
+
+## Step 3: Start Jupyter (1 minute)
+
+```bash
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 ```
 
-## Manual Setup (3 Steps)
+Then:
+1. Copy the URL with token from terminal
+2. Replace `127.0.0.1` with your Vast.ai instance IP
+3. Open in browser
 
-### 1. Create Environment
-```bash
-python3 -m venv venv
-source venv/bin/activate  # macOS/Linux
-# or
-venv\Scripts\activate.bat  # Windows
+---
+
+## Step 4: Run Notebooks (1-2 hours)
+
+Execute in order:
+
+### 1. Data Preprocessing (10 min)
 ```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Start Jupyter
-```bash
-jupyter notebook
-```
-
-## Run Your First Experiment
-
-Open notebooks in order:
-
-### 1️⃣ Data Preprocessing (5 min)
-```bash
 01_data_collection_and_preprocessing.ipynb
 ```
-Loads and formats FinQA dataset.
+- Loads and formats FinQA dataset
+- 10+ visualizations
 
-### 2️⃣ Model Training (30-60 min)
-```bash
+### 2. Model Training (15-45 min)
+```
 02_model_optimization_and_training.ipynb
 ```
-Trains a financial AI model.
+- QLoRA 4-bit training
+- GPU-optimized
+- Auto-saves model
 
-**MacBook users**: Change these settings in the notebook:
-```python
-runtime.model_key = "tinyllama-1.1b"  # Use smaller model
-runtime.max_train_samples = 200        # Train on fewer samples
+**Training time by GPU**:
+- RTX 5090: ~15-20 min
+- RTX 4090: ~20-30 min  
+- RTX 3090: ~30-45 min
+
+### 3. Evaluation (30 min)
 ```
-
-### 3️⃣ Evaluation (10 min)
-```bash
 03_evaluation_and_benchmarking.ipynb
 ```
-Tests model performance.
+- Chain-of-Thought benchmarks
+- Retrieval metrics
+- Performance analysis
 
-## Platform-Specific Tips
-
-### 💻 Running on MacBook
-- Use smaller models: `tinyllama-1.1b` or `qwen2.5-1.5b`
-- Reduce samples: `max_train_samples = 200`
-- Full-precision only (no QLoRA)
-
-### ☁️ Running on Vast.ai
-- Use any GPU with 16GB+ VRAM
-- Full QLoRA (4-bit) support
-- Can train on full dataset (6,251 samples)
-
-### 🆓 Running on Google Colab
-- Free T4 GPU available
-- Notebooks work out-of-the-box
-- QLoRA supported
-
-## Common Issues
-
-### Out of Memory?
-```python
-# Reduce these in notebook 02:
-runtime.per_device_train_batch_size = 1
-runtime.max_train_samples = 100
+### 4. Optional: RAG Demo (15 min)
+```
+04_geo_search_query.ipynb
 ```
 
-### CUDA Not Available?
-If you have an NVIDIA GPU but CUDA isn't working:
+### 5. Optional: Reasoning Benchmark (20 min)
+```
+05_logical_reasoning_benchmark.ipynb
+```
+
+---
+
+## Expected Costs
+
+| GPU | Time | Cost |
+|-----|------|------|
+| RTX 4090 | 1.5 hrs | $0.50-0.75 |
+| RTX 5090 | 1 hr | $0.50-0.80 |
+
+**Total Project Cost**: $1-2 for complete run
+
+---
+
+## Troubleshooting
+
+### GPU Not Detected
 ```bash
-pip install torch --index-url https://download.pytorch.org/whl/cu118
+nvidia-smi  # Check GPU availability
+python3 -c "from gpu_utils import validate_gpu_environment; validate_gpu_environment()"
 ```
 
-### Module Not Found?
+### Out of Memory
+Edit notebook cell:
+```python
+runtime.per_device_train_batch_size = 2
+runtime.gradient_accumulation_steps = 8
+```
+
+### Dependencies Missing
 ```bash
 pip install -r requirements.txt --force-reinstall
 ```
 
-## Need More Help?
+---
 
-- 📖 [Detailed MacBook Setup](SETUP_LOCAL.md)
-- ☁️ [Detailed Vast.ai Setup](SETUP_VASTAI.md)
-- 📘 [Full Documentation](README.md)
+## Next Steps
 
-## What You'll Get
+- **Detailed Setup**: See [SETUP_VASTAI.md](SETUP_VASTAI.md)
+- **Training Guide**: See [TRAINING_GUIDE.md](TRAINING_GUIDE.md)
+- **Thesis Work**: See [THESIS_GUIDE.md](THESIS_GUIDE.md)
 
-After running all 3 notebooks:
-- ✅ Trained financial AI model
-- ✅ Performance benchmarks
-- ✅ Model saved to `fingeo-slm-adapter/`
-- ✅ Processed data in `processed_data/`
+---
 
-Ready? Run `./setup.sh` (or `setup.bat`) and start Jupyter!
+**Questions?** Check [SETUP_VASTAI.md](SETUP_VASTAI.md) for detailed troubleshooting.

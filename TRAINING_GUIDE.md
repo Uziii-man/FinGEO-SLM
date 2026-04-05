@@ -1,258 +1,155 @@
-# Training Guide - How to Train Your FinGEO-SLM Model
+# FinGEO-SLM Training Guide
 
-## ✅ Notebook Fixed & Ready
+This guide walks you through training a financial QA model on Vast.ai GPU.
 
-I've fixed the model saving logic in `02_model_optimization_and_training.ipynb`. The notebook is now ready for GPU training.
+---
 
 ## Prerequisites
 
-### Required Hardware
-- **GPU**: NVIDIA GPU with 8GB+ VRAM (16GB recommended)
-  - RTX 3060 (12GB) - Minimum
-  - RTX 3090 (24GB) - Recommended
-  - RTX 4090 (24GB) - Ideal
-  - A100 (40GB/80GB) - Professional
+- **GPU Required**: CUDA-capable GPU (RTX 4090/5090 recommended)
+- **Platform**: Vast.ai GPU instance
+- **Data**: FinQA dataset (included in repository)
+- **Time**: 15-45 minutes depending on GPU
 
-### Why GPU is Required
-- **CPU training**: ~5-7 days for 5000 samples
-- **GPU training**: ~2-4 hours for 5000 samples
-- The notebook uses QLoRA (4-bit quantization) which requires GPU
+---
 
-## Option 1: Use Vast.ai (Recommended - Cheap GPU Rental)
+## Quick Start
 
-### Step 1: Sign up for Vast.ai
+### Step 1: Setup Vast.ai Instance
+
 ```bash
-# Visit: https://vast.ai
-# Create account and add $10-20 credit
+# 1. Rent GPU instance on vast.ai (RTX 4090/5090 recommended)
+# 2. SSH into instance
+ssh root@<instance-ip> -p <port>
+
+# 3. Clone and setup
+cd /workspace
+git clone <your-repo-url>
+cd FinGEO-SLM
+./setup.sh
 ```
 
-### Step 2: Rent a GPU Instance
-1. Go to "Search" → Find instances with:
-   - GPU: RTX 3090 or RTX 4090
-   - VRAM: 16GB+
-   - Disk: 50GB+
-   - Price: ~$0.20-0.50/hour
+### Step 2: Run Data Preprocessing
 
-2. Select PyTorch template or Ubuntu with CUDA
-
-3. Start instance and get SSH credentials
-
-### Step 3: Upload Your Project
 ```bash
-# From your local machine
-scp -r /Users/uzmanarfan/Documents/FinGEO-SLM root@<vast-ip>:/workspace/
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 ```
 
-Or use their web file manager.
+1. Open `01_data_collection_and_preprocessing.ipynb`
+2. Run all cells
+3. Wait for completion (~10 minutes)
 
-### Step 4: Run Training
-```bash
-# SSH into Vast.ai instance
-ssh root@<vast-ip> -p <port>
+### Step 3: Train Model
 
-# Navigate to project
-cd /workspace/FinGEO-SLM
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run training notebook
-jupyter nbconvert --to notebook --execute 02_model_optimization_and_training.ipynb --output 02_executed.ipynb
-
-# Or open Jupyter and run manually:
-jupyter notebook --allow-root --no-browser --port=8888
-```
-
-### Step 5: Download Trained Model
-```bash
-# After training completes
-scp -r root@<vast-ip>:/workspace/FinGEO-SLM/fingeo_slm_outputs ./
-```
-
-**Cost estimate**: ~$1-2 for full training run
-
-## Option 2: Google Colab (Free GPU, Limited Time)
-
-### Step 1: Upload to Google Drive
-1. Upload entire `FinGEO-SLM` folder to Google Drive
-2. Keep it in: `MyDrive/FinGEO-SLM/`
-
-### Step 2: Open in Colab
+1. Open `02_model_optimization_and_training.ipynb`
+2. Configure model (optional):
 ```python
-# In Colab, mount drive
-from google.colab import drive
-drive.mount('/content/drive')
-
-# Change to project directory
-import os
-os.chdir('/content/drive/MyDrive/FinGEO-SLM')
-
-# Verify location
-!pwd
-!ls -la
+runtime.model_key = "phi3-mini"       # Model choice
+runtime.max_train_samples = 6203      # Full dataset
+runtime.num_train_epochs = 3          # Epochs
 ```
+3. Run all cells
+4. Training completes in 15-45 minutes
 
-### Step 3: Enable GPU
-1. Runtime → Change runtime type
-2. Hardware accelerator: **GPU** (T4)
-3. Save
+### Step 4: Evaluate
 
-### Step 4: Run Notebook
-- Open `02_model_optimization_and_training.ipynb` in Colab
-- Run all cells
-- Model saves to Google Drive automatically
+1. Open `03_evaluation_and_benchmarking.ipynb`
+2. Run all cells
+3. Review benchmarks and visualizations
 
-**Limitations**:
-- ⚠️ 12-hour session limit (training should complete in 2-4 hours)
-- ⚠️ May disconnect if idle
-- ✅ Free!
+---
 
-## Option 3: Local GPU (If You Have One)
+## Training Configuration
 
-### Check GPU
-```bash
-# Check if CUDA is available
-python3 check_gpu.py
+### Model Options
 
-# Or check directly
-nvidia-smi
-```
+| Model | Parameters | VRAM | Time | Best For |
+|-------|-----------|------|------|----------|
+| `phi3-mini` | 3.8B | 16GB | 20-45 min | Production ⭐ |
+| `qwen2.5-1.5b` | 1.5B | 10GB | 15-30 min | Balanced |
+| `mistral-7b` | 7B | 24GB | 45-90 min | Best accuracy |
 
-### Install CUDA (if needed)
-```bash
-# macOS - Not supported (M1/M2 uses MPS, not fully compatible)
-# Windows/Linux - Install CUDA Toolkit 11.8+
-# https://developer.nvidia.com/cuda-downloads
-```
+### Training Parameters
 
-### Run Training
-```bash
-cd /Users/uzmanarfan/Documents/FinGEO-SLM
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run notebook
-jupyter notebook
-# Open 02_model_optimization_and_training.ipynb
-# Run all cells
-```
-
-## What the Training Does
-
-### 1. Data Loading
-- Loads financial Q&A pairs from `processed_data/`
-- Formats them with Chain-of-Thought prompts
-- Splits into train/eval (90/10)
-
-### 2. Model Setup
-- Loads Phi-3-mini (3.8B parameters)
-- Applies 4-bit quantization (reduces to ~2GB VRAM)
-- Adds LoRA adapters (only trains ~1% of parameters)
-
-### 3. Training
-- Trains for 3 epochs (default)
-- ~5000 samples
-- Takes 2-4 hours on RTX 3090
-- Saves checkpoints every 500 steps
-
-### 4. Model Saving (FIXED!)
-The notebook now saves:
-
-**a) Adapter only** (`fingeo_slm_outputs/fingeo-slm-adapter/`)
-- Just the LoRA weights (~50MB)
-- Fast to save/load
-- Need base model to use
-
-**b) Merged model** (`fingeo_slm_outputs/finetuned_model/`)
-- LoRA merged with base model
-- Ready to use in notebook 4
-- ~7GB total size
-- This is what notebook 4 looks for!
-
-## After Training Completes
-
-### Verify Model Saved
-```bash
-ls -lh fingeo_slm_outputs/finetuned_model/
-# Should see:
-# - config.json
-# - model.safetensors (or pytorch_model.bin)
-# - tokenizer.json
-# - tokenizer_config.json
-```
-
-### Test in Notebook 4
 ```python
-# In 04_geo_search_query.ipynb
-MODEL_PATH = "./fingeo_slm_outputs/finetuned_model"
-ENABLE_MODEL_GENERATION = True
-
-# Run the model status checker cell
-# Should show: ✅ Model is properly saved
+# Default configuration
+runtime.model_key = "phi3-mini"
+runtime.max_train_samples = 6203      # Full dataset
+runtime.num_train_epochs = 3
+runtime.per_device_train_batch_size = 4
+runtime.gradient_accumulation_steps = 4
+runtime.learning_rate = 2e-4
 ```
+
+### GPU-Specific Settings
+
+| GPU | VRAM | Batch Size | Expected Time |
+|-----|------|------------|---------------|
+| RTX 5090 | 32GB | 8 | 15-20 min |
+| RTX 4090 | 24GB | 4 | 20-30 min |
+| RTX 3090 | 24GB | 4 | 30-45 min |
+| A100 | 40GB | 8 | 15-25 min |
+
+---
 
 ## Troubleshooting
 
-### "CUDA out of memory"
+### Out of Memory (OOM)
+
 ```python
-# In notebook 2, reduce batch size:
-# Find RuntimeConfig and change:
-# per_device_train_batch_size = 1  # Instead of 2
-# gradient_accumulation_steps = 8  # Instead of 4
+# Reduce batch size
+runtime.per_device_train_batch_size = 2
+runtime.gradient_accumulation_steps = 8
 ```
 
-### "Training too slow"
-```python
-# Reduce dataset size:
-max_train_samples: int = 1000  # Instead of 5000
-```
+### Training Too Slow
 
-### "Model not saving"
+- Check GPU utilization: `nvidia-smi`
+- Ensure CUDA is detected
+- Consider faster GPU (RTX 5090/A100)
+
+### Model Not Saving
+
 - Check disk space: `df -h`
-- Verify the fix worked - look for "SAVING MODEL" output
-- Check permissions: `ls -la fingeo_slm_outputs/`
+- Verify output directory exists
+- Check permissions
 
-### "Session disconnected on Colab"
-- Training state is lost if disconnected
-- Use checkpoint recovery:
-```python
-# In notebook 2, add to TrainingArguments:
-resume_from_checkpoint=True
+---
+
+## Output Files
+
+After training:
+
+```
+fingeo_slm_outputs/
+├── finetuned_model/          # Main model (~7GB)
+│   ├── config.json
+│   ├── model.safetensors
+│   ├── tokenizer.json
+│   └── ...
+└── fingeo-slm-adapter/       # LoRA adapter (~50MB)
 ```
 
-## Expected Timeline
-
-| Stage | Time |
-|-------|------|
-| Setup & data loading | 5 min |
-| Model initialization | 2 min |
-| Training (5000 samples) | 2-4 hours |
-| Model saving | 5 min |
-| **Total** | **2.5-4.5 hours** |
+---
 
 ## Cost Estimates
 
-| Option | Cost | Time |
-|--------|------|------|
-| Vast.ai RTX 3090 | $1-2 | 3 hours |
-| Vast.ai RTX 4090 | $2-3 | 2 hours |
-| Google Colab (free) | $0 | 3-4 hours |
-| Google Colab Pro | $10/month | 2 hours |
+| GPU | Hourly Rate | Training Time | Total Cost |
+|-----|-------------|---------------|------------|
+| RTX 4090 | $0.35-0.50 | 30-45 min | $0.25-0.40 |
+| RTX 5090 | $0.50-0.80 | 15-25 min | $0.20-0.35 |
+| A100 | $1.00-1.50 | 15-25 min | $0.40-0.65 |
+
+**Total Project Cost**: $1-3 for complete training + evaluation
+
+---
 
 ## Next Steps
 
-1. **Choose your GPU platform** (Vast.ai recommended for cost)
-2. **Upload project** to the platform
-3. **Run notebook 2** - all cells in order
-4. **Wait for completion** - go get coffee ☕
-5. **Download model** if on cloud platform
-6. **Test in notebook 4** - should load automatically!
+After training:
+1. Run `03_evaluation_and_benchmarking.ipynb` for evaluation
+2. Run `04_geo_search_query.ipynb` for RAG demo
+3. Run `05_logical_reasoning_benchmark.ipynb` for reasoning tests
+4. Download model to permanent storage
 
-## Need Help?
-
-- Check `CHECK_MODEL_STATUS.md` for verification
-- Run the model status checker in notebook 4
-- Check training logs in `fingeo_slm_logs/`
-
-Good luck with your training! 🚀
+See [THESIS_GUIDE.md](THESIS_GUIDE.md) for academic workflow.

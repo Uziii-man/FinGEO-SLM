@@ -2,65 +2,72 @@
 
 **Financial Question Answering with Small Language Models**
 
-A complete thesis-ready framework for fine-tuning Small Language Models (SLMs) on financial question-answering tasks with RAG (Retrieval-Augmented Generation), comprehensive evaluation, and multi-platform support.
+A production-ready framework for fine-tuning Small Language Models (SLMs) on financial question-answering tasks with RAG (Retrieval-Augmented Generation) and comprehensive evaluation.
+
+> **⚠️ GPU REQUIRED**: This project requires a CUDA-capable GPU. Recommended: Vast.ai GPU instance (RTX 4090/5090).
 
 ---
 
 ## 🌟 Key Features
 
-✅ **Self-Contained Notebooks** - All code inline, no external Python modules needed
-✅ **40+ Visualizations** - Comprehensive data exploration and analysis
-✅ **Multi-Platform** - Works on Local MacBook, Google Colab, and Vast.ai
-✅ **Google Drive Integration** - Automatic data persistence on Colab
-✅ **QLoRA Support** - Memory-efficient 4-bit training on CUDA GPUs
-✅ **Chain-of-Thought Evaluation** - Advanced reasoning benchmarks with COT examples
-✅ **Model Generation Enabled** - Real model inference enabled by default
-✅ **Thesis-Ready** - Publication-quality experiments and documentation
-✅ **Zero Configuration** - Auto-detects platform and configures itself
+✅ **GPU-Optimized** - CUDA-only for maximum performance  
+✅ **40+ Visualizations** - Comprehensive data exploration and analysis  
+✅ **QLoRA Training** - Memory-efficient 4-bit training on GPUs  
+✅ **Chain-of-Thought Evaluation** - Advanced reasoning benchmarks  
+✅ **RAG Pipeline** - Dense + sparse retrieval with reranking  
+✅ **Production-Ready** - Clean, focused codebase  
+✅ **Thesis-Ready** - Publication-quality experiments and documentation  
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Vast.ai)
 
-### Option 1: Local MacBook
+### 1. Rent a GPU Instance
+
+**Recommended**: RTX 4090 or 5090 (24-32GB VRAM)
 
 ```bash
-git clone <your-repo-url>
-cd FinGEO-SLM
-./setup.sh
-source venv/bin/activate
-jupyter notebook
+# Vast.ai search filters:
+# - GPU: RTX 4090 or 5090
+# - VRAM: ≥24GB
+# - Disk: ≥50GB
+# - Cost: ~$0.35-0.60/hour
 ```
 
-**Time**: 5 minutes | **Cost**: Free
-
-📖 [Full Local Setup Guide](SETUP_LOCAL.md)
-
-### Option 2: Google Colab (Recommended for Beginners)
-
-1. Go to [colab.research.google.com](https://colab.research.google.com)
-2. Upload `01_data_collection_and_preprocessing.ipynb`
-3. Runtime → Change runtime type → **T4 GPU**
-4. Runtime → **Run all**
-5. Authorize Google Drive when prompted
-
-**Time**: 2 minutes | **Cost**: Free
-
-📖 [Colab Quick Start](QUICK_START_COLAB.md)
-
-### Option 3: Vast.ai (Best for Production)
+### 2. Setup Environment
 
 ```bash
+# Clone repository
 cd /workspace
 git clone <your-repo-url>
 cd FinGEO-SLM
-pip install -r requirements.txt
-jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+
+# Run setup script (installs dependencies, validates GPU)
+./setup.sh
+
+# Verify GPU
+python3 -c "from gpu_utils import print_gpu_quick_check; print_gpu_quick_check()"
 ```
 
-**Time**: 15 minutes | **Cost**: ~$0.35/hour
+### 3. Run Notebooks
 
-📖 [Vast.ai Setup](SETUP_VASTAI.md)
+```bash
+# Start Jupyter
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+
+# Then access via Vast.ai's provided URL
+```
+
+**Execution Order**:
+1. `01_data_collection_and_preprocessing.ipynb` (10 min)
+2. `02_model_optimization_and_training.ipynb` (15-45 min)
+3. `03_evaluation_and_benchmarking.ipynb` (30 min)
+4. `04_geo_search_query.ipynb` (optional, 15 min)
+5. `05_logical_reasoning_benchmark.ipynb` (optional, 20 min)
+
+**Total Time**: ~1-2 hours | **Cost**: $0.60-1.20
+
+📖 **Full Setup Guide**: [SETUP_VASTAI.md](SETUP_VASTAI.md)
 
 ---
 
@@ -68,233 +75,80 @@ jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 
 ```
 FinGEO-SLM/
-├── 📓 Notebooks (Self-Contained - 40+ Visualizations)
-│   ├── 01_data_collection_and_preprocessing.ipynb  # 10 visualizations
-│   ├── 02_model_optimization_and_training.ipynb    # 6 visualizations
-│   ├── 03_evaluation_and_benchmarking.ipynb        # 10+ visualizations
-│   ├── 04_geo_search_query.ipynb                   # 10 visualizations
-│   └── 05_logical_reasoning_benchmark.ipynb        # 6+ visualizations (COT)
+├── 📓 Notebooks
+│   ├── 01_data_collection_and_preprocessing.ipynb
+│   ├── 02_model_optimization_and_training.ipynb
+│   ├── 03_evaluation_and_benchmarking.ipynb
+│   ├── 04_geo_search_query.ipynb
+│   └── 05_logical_reasoning_benchmark.ipynb
 │
 ├── 📚 Data
-│   └── data/finQA/                                 # 6,251 training samples
+│   └── data/finQA/
 │
-├── ⚙️ Config & Scripts
+├── ⚙️ Configuration
 │   ├── requirements.txt
-│   ├── setup.sh / setup.bat
-│   └── configs/
+│   ├── setup.sh
+│   └── gpu_utils.py
 │
 └── 📖 Documentation
-    ├── README.md                                   # This file
-    ├── QUICKSTART.md                               # 5-min start
-    ├── QUICK_START_COLAB.md                        # Colab guide
-    ├── SETUP_LOCAL.md                              # Local setup
-    ├── SETUP_VASTAI.md                             # Cloud GPU
-    ├── PLATFORM_COMPARISON.md                      # Colab vs Vast.ai
-    ├── RETRIEVAL_QUALITY_GUIDE.md                  # Retrieval optimization
-    ├── THESIS_GUIDE.md                             # Academic workflow
-    └── CHANGELOG.md                                # Project history
+    ├── README.md
+    ├── SETUP_VASTAI.md
+    ├── QUICKSTART.md
+    ├── TRAINING_GUIDE.md
+    ├── BENCHMARK_GUIDE.md
+    └── THESIS_GUIDE.md
 ```
 
 ---
 
-## 🎯 Workflow
+## 🖥️ GPU Requirements
 
-### 1️⃣ Data Preprocessing (10 minutes)
-```bash
-jupyter notebook 01_data_collection_and_preprocessing.ipynb
-```
+| GPU | VRAM | Training Time | Cost/Hour | Status |
+|-----|------|---------------|-----------|--------|
+| RTX 5090 | 32GB | 15-20 min | $0.50-0.80 | ✅ Best |
+| RTX 4090 | 24GB | 20-30 min | $0.35-0.50 | ✅ Great |
+| RTX 3090 | 24GB | 30-45 min | $0.25-0.40 | ✅ Good |
+| A100 (40GB) | 40GB | 15-25 min | $1.00-1.50 | ⚡ Fastest |
 
-- Loads FinQA dataset (6,251 samples)
-- Applies Chain-of-Thought formatting
-- 10+ visualizations (distributions, statistics)
-- **Colab**: Auto-saves to Google Drive 📁
-
-### 2️⃣ Model Training (30min - 3 hours)
-```bash
-jupyter notebook 02_model_optimization_and_training.ipynb
-```
-
-- Auto-detects platform (CUDA/MPS/CPU)
-- Trains Phi-3, Qwen, TinyLlama, or Mistral
-- QLoRA on CUDA, full-precision on MPS
-- **Colab**: Auto-loads data, saves model to Drive 📁
-
-**Configure**:
-```python
-runtime.model_key = "phi3-mini"       # Model choice
-runtime.max_train_samples = 6203      # Full dataset
-runtime.num_train_epochs = 3          # Epochs
-```
-
-### 3️⃣ Evaluation (30 minutes)
-```bash
-jupyter notebook 03_evaluation_and_benchmarking.ipynb
-```
-
-- **Chain-of-Thought Benchmarking**: Logical reasoning with step-by-step evaluation
-- **Retrieval Metrics**: Recall@K, MRR
-- **Generation Quality**: Accuracy, faithfulness, semantic similarity
-- **Hardware Performance**: TTFT, throughput
-- **Ablations**: Dense vs sparse, reranking, COT vs non-COT
-- **Model Generation**: ENABLED by default for real inference
-- **Colab**: Auto-loads everything from Drive 📁
-
-### 4️⃣ RAG Demo (Optional, 15 minutes)
-```bash
-jupyter notebook 04_geo_search_query.ipynb
-```
-
-- PDF loading, chunking, BM25 retrieval
-- 10 visualizations
-
-### 5️⃣ Logical Reasoning Benchmark (Optional, 20 minutes)
-```bash
-jupyter notebook 05_logical_reasoning_benchmark.ipynb
-```
-
-- **20 logical reasoning questions** across 5 categories
-- **Chain-of-Thought evaluation** with step-by-step reasoning
-- **SLM vs Expected reasoning** side-by-side comparison
-- 6+ visualizations with performance dashboards
-- **Model Generation**: Enabled by default
+**Minimum**: 16GB VRAM  
+**Recommended**: 24GB+ VRAM
 
 ---
 
-## 🖥️ Platform Support
+## 🎛️ Supported Models
 
-| Platform | QLoRA | Speed | Cost | Best For |
-|----------|-------|-------|------|----------|
-| **MacBook (MPS)** | ❌ | 1x | Free | Dev, testing |
-| **Colab Free** | ✅ | 3-4x | Free | Learning |
-| **Colab Pro** | ✅ | 4-6x | $10/mo | Convenience |
-| **Vast.ai (RTX 3090)** | ✅ | 5-8x | $0.35/hr | Production ⭐ |
-| **Vast.ai (A100)** | ✅ | 8-12x | $1/hr | Large-scale |
-
-**MacBook Note**: No 4-bit QLoRA (`bitsandbytes` is CUDA-only). Notebooks auto-fall back to full-precision.
+| Model | Parameters | VRAM | Training Time |
+|-------|-----------|------|---------------|
+| `phi3-mini` | 3.8B | 16GB | 20-45min ⭐ |
+| `qwen2.5-1.5b` | 1.5B | 10GB | 20-35min |
+| `mistral-7b` | 7B | 24GB | 45-90min |
 
 ---
 
-## 🎓 For Thesis Work
+## 📖 Documentation
 
-**Complete experimental workflow**:
-
-- **Week 1**: Data prep & initial training
-- **Week 2-3**: Production training (3 models)
-- **Week 4**: Evaluation & documentation
-
-📖 [Complete Guide](THESIS_GUIDE.md) (400+ lines)
-
-**Cost**: $10-30 (hybrid Colab + Vast.ai approach)
-
----
-
-## 🎛️ Models
-
-| Model | Params | VRAM | Time | Best For |
-|-------|--------|------|------|----------|
-| `tinyllama-1.1b` | 1.1B | 8GB | 30-60min | MacBook, quick tests |
-| `qwen2.5-1.5b` | 1.5B | 10GB | 45-90min | Balanced |
-| `phi3-mini` | 3.8B | 16GB | 2-3hrs | Production ⭐ |
-| `mistral-7b` | 7B | 24GB | 3-4hrs | Best accuracy |
-
----
-
-## 📊 Visualizations (40+)
-
-| Notebook | Count | Content |
-|----------|-------|---------|
-| 01 - Data | 10 | EDA, distributions, token analysis |
-| 02 - Training | 6 | Parameters, training curves |
-| 03 - Eval | 10+ | Benchmarks, ablations, performance metrics |
-| 04 - RAG | 10 | Retrieval analysis |
-| 05 - Logical Reasoning | 6+ | COT evaluation, reasoning comparison, dashboards |
-
-### Logical Reasoning Benchmark (Notebook 5):
-- **Chain-of-Thought Visualizations**: COT vs non-COT comparison charts
-- **Category Performance Heatmaps**: Multi-dimensional accuracy analysis
-- **Improvement Breakdowns**: Per-category COT impact analysis
-- **SLM Reasoning Display**: Expected vs generated reasoning side-by-side
-- **Comprehensive Dashboard**: 6-panel benchmark summary with key metrics
-
----
-
-## 🧠 Chain-of-Thought Evaluation
-
-The evaluation notebook now includes comprehensive Chain-of-Thought (COT) benchmarking:
-
-### Logical Reasoning Tests
-- **6 Test Cases** across 3 categories:
-  - Math Word Problems
-  - Logical Inference
-  - Pattern Recognition
-
-### COT Benefits
-- **Step-by-step reasoning** for complex financial problems
-- **+20% average improvement** in accuracy with COT prompting
-- **Interpretable outputs** showing intermediate reasoning steps
-- **Error analysis** comparing COT vs non-COT performance
-
-### Evaluation Metrics
-```python
-# Example COT test case
-{
-  "question": "A company's revenue was $50,000 in January. 
-               It increased by 20% in February, then decreased 
-               by 10% in March. What was the revenue in March?",
-  "reasoning_steps": [
-    "January revenue: $50,000",
-    "February: $50,000 × 1.20 = $60,000",
-    "March: $60,000 × 0.90 = $54,000"
-  ],
-  "expected_answer": "$54,000"
-}
-```
-
-### Visualizations
-- Overall accuracy comparison (COT vs non-COT)
-- Category-wise performance breakdown
-- Improvement distribution charts
-- Success rate distributions
-
----
-
-## 🔧 Troubleshooting
-
-### Out of Memory (MacBook)
-```python
-runtime.model_key = "tinyllama-1.1b"
-runtime.max_train_samples = 200
-runtime.per_device_train_batch_size = 1
-```
-
-### FileNotFoundError (Colab)
-**Solution**: Run "Runtime → Run all" (don't skip cells!)
-
-### Training Too Slow
-Use Vast.ai instead of MacBook for production runs.
-
----
-
-## 📚 Datasets
-
-- **FinQA**: 6,251 training samples (IBM)
-- **FinanceBench**: 150 eval samples (PatronusAI)
-
----
-
-## 📞 Support
-
-- 📖 [THESIS_GUIDE.md](THESIS_GUIDE.md) - Academic workflow
-- ☁️ [PLATFORM_COMPARISON.md](PLATFORM_COMPARISON.md) - Colab vs Vast.ai
-- 🚀 [QUICKSTART.md](QUICKSTART.md) - 5-minute intro
+- **[SETUP_VASTAI.md](SETUP_VASTAI.md)** - Vast.ai setup guide
+- **[QUICKSTART.md](QUICKSTART.md)** - 5-minute overview  
+- **[TRAINING_GUIDE.md](TRAINING_GUIDE.md)** - Training procedures
+- **[THESIS_GUIDE.md](THESIS_GUIDE.md)** - Academic workflow
 
 ---
 
 ## 🎉 Getting Started
 
-**New to ML?** → [QUICK_START_COLAB.md](QUICK_START_COLAB.md) (2 min)
-**Have a MacBook?** → [SETUP_LOCAL.md](SETUP_LOCAL.md) (`./setup.sh`)
-**Want production results?** → [SETUP_VASTAI.md](SETUP_VASTAI.md)
-**Writing a thesis?** → [THESIS_GUIDE.md](THESIS_GUIDE.md)
+```bash
+# 1. Rent Vast.ai GPU (RTX 4090/5090)
+# 2. Clone and setup
+./setup.sh
 
-**All notebooks work on all platforms with zero modification!** 🎊
+# 3. Start Jupyter
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+
+# 4. Run notebooks in order
+```
+
+**Questions?** See [SETUP_VASTAI.md](SETUP_VASTAI.md)
+
+---
+
+**🚀 Ready for production GPU training!**
