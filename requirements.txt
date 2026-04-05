@@ -28,6 +28,9 @@ langchain-text-splitters>=0.2.0
 pymupdf>=1.24.0
 rank_bm25>=0.2.2
 
+# Evaluation Metrics
+rouge-score>=0.1.2
+
 # Dense Retrieval (FAISS + Sentence Transformers)
 sentence-transformers>=2.2.0
 faiss-cpu>=1.7.4
