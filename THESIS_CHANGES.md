@@ -60,6 +60,35 @@ All thesis claims now have matching implementations in the codebase:
   - `run_logical_reasoning_benchmark()` - full benchmark with comparison
   - CoT vs non-CoT comparison metrics
 
+### 8. 100-Question Financial Benchmark ✓ (v2.0 - IMPROVED)
+- **Thesis Section 3.7.5**: "Comprehensive Financial Question Benchmark"
+- **Implementation**: Added to `04_geo_search_query.ipynb`:
+  - **Dataset**: `data/benchmark_questions_100.json` (100 questions, v2.0)
+    - **21 company-specific questions** (all PDFs in data/docs/):
+      - Bank of Ceylon (5): revenue, assets, NPL ratio, loan portfolio, net income
+      - John Keells Holdings (5): revenue, EBITDA, EPS, sector revenue, market cap
+      - Colombo Dockyard (3): revenue, operating margin, ship repairs
+      - AGALAWATTE Plantations (2): revenue, tea production
+      - AMW Capital Leasing (2): revenue, lease portfolio
+      - VONE Telecommunications (2): revenue, subscriber growth
+      - Comparative analysis (2): cross-company comparisons
+    - **79 FinQA test questions** (real financial reasoning tasks)
+  - **✨ Version 2.0 Improvement**: All PDF questions now **explicitly mention company names**
+    - ✅ CORRECT: "What was Bank of Ceylon's revenue in 2025?"
+    - ❌ WRONG: "What was the revenue in 2025?" (ambiguous when multiple companies exist)
+  - **Categories**: 8 types (bank, conglomerate, industrial, agriculture, financial services, telecom, comparative, reasoning)
+  - **Metrics**:
+    - Retrieval success rate (answer containment check)
+    - Average/min/max retrieval time (ms)
+    - Performance by source (FinQA vs each PDF company)
+    - Error tracking and reporting
+  - **Visualization**: 4-panel dashboard (`benchmark_results_100q.png`)
+    - Success rate pie chart
+    - Performance by source bar chart (shows all 6 companies + FinQA)
+    - Retrieval time histogram with mean marker
+    - Summary statistics panel
+  - **Use in thesis**: Provides large-scale evaluation (100 questions) across 6 real Sri Lankan companies + FinQA dataset
+
 ---
 
 ## ✅ No Thesis Text Changes Required
@@ -81,6 +110,7 @@ All features are now implemented! Your thesis accurately describes the codebase.
 | Memory Profiling | `03_evaluation_and_benchmarking.ipynb` | `MemoryProfiler` class |
 | Hallucination | `03_evaluation_and_benchmarking.ipynb` | `numerical_hallucination_rate()`, `enhanced_faithfulness_score()` |
 | Logical Reasoning | `03_evaluation_and_benchmarking.ipynb` | `evaluate_cot_reasoning()`, `run_logical_reasoning_benchmark()` |
+| 100-Q Benchmark | `04_geo_search_query.ipynb` | Benchmark evaluation loop with visualization (103 questions) |
 
 ---
 

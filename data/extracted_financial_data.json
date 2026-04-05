@@ -1,0 +1,29 @@
+{
+  "Bank of Ceylon": {
+    "company": "Bank of Ceylon",
+    "source": "boc25.pdf",
+    "profit_before_tax": "120.8 billion",
+    "total_assets": "5.5 trillion",
+    "net_profit": "57.4 billion"
+  },
+  "John Keells Holdings": {
+    "company": "John Keells Holdings",
+    "source": "jkh24:25.pdf"
+  },
+  "Colombo Dockyard": {
+    "company": "Colombo Dockyard",
+    "source": "dockyard25.pdf"
+  },
+  "AGALAWATTE Plantations": {
+    "company": "AGALAWATTE Plantations",
+    "source": "AGALAWATTEPLANTATIONS25.pdf"
+  },
+  "AMW Capital Leasing": {
+    "company": "AMW Capital Leasing",
+    "source": "amw25.pdf"
+  },
+  "VONE Telecommunications": {
+    "company": "VONE Telecommunications",
+    "source": "vone24:25.pdf"
+  }
+}

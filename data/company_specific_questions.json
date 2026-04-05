@@ -1,0 +1,530 @@
+{
+  "metadata": {
+    "total_questions": 50,
+    "companies": [
+      "Bank of Ceylon",
+      "John Keells Holdings",
+      "Vallibel One",
+      "AMW Capital Leasing",
+      "Agalawatte Plantations",
+      "Colombo Dockyard"
+    ],
+    "categories": [
+      "bank_financials",
+      "conglomerate_financials",
+      "financial_services",
+      "agriculture_financials",
+      "industrial_financials"
+    ],
+    "sources": [
+      "boc25.pdf",
+      "jkh24:25.pdf",
+      "vone24:25.pdf",
+      "amw25.pdf",
+      "AGALAWATTEPLANTATIONS25.pdf",
+      "dockyard25.pdf"
+    ]
+  },
+  "questions": [
+    {
+      "id": "boc_total_assets_val",
+      "question": "What was the total asset base of Bank of Ceylon as of December 31, 2025?",
+      "answer": "LKR 5.5 trillion",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "total_assets"
+    },
+    {
+      "id": "boc_deposits_val",
+      "question": "What was the total value of deposits held by Bank of Ceylon at the end of 2025?",
+      "answer": "LKR 4.4 trillion",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "deposits"
+    },
+    {
+      "id": "boc_loans_val",
+      "question": "What was Bank of Ceylon's gross loans and advances balance as of December 31, 2025?",
+      "answer": "LKR 2.7 trillion",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "gross_loans"
+    },
+    {
+      "id": "boc_pbt_val",
+      "question": "What was the Profit Before Tax reported by Bank of Ceylon for the 2025 financial year?",
+      "answer": "LKR 120.8 billion",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "profit_before_tax"
+    },
+    {
+      "id": "boc_equity_val",
+      "question": "What was the total equity of Bank of Ceylon as of year-end 2025?",
+      "answer": "LKR 365.8 billion",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "equity"
+    },
+    {
+      "id": "boc_car_val",
+      "question": "What was Bank of Ceylon's total capital adequacy ratio as of December 31, 2025?",
+      "answer": "16.89%",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "capital_adequacy_ratio"
+    },
+    {
+      "id": "boc_bond_val",
+      "question": "What was the value of the sustainability bond issued by Bank of Ceylon in December 2025?",
+      "answer": "LKR 20.0 billion",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "debt_issuance"
+    },
+    {
+      "id": "boc_nii_val",
+      "question": "How much net interest income did the BOC Group earn in 2025?",
+      "answer": "LKR 211,843 million",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "net_interest_income"
+    },
+    {
+      "id": "boc_govt_value",
+      "question": "What was the total value provided to the Government of Sri Lanka by BOC in 2025?",
+      "answer": "LKR 89,395 million",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "value_to_government"
+    },
+    {
+      "id": "boc_employee_val",
+      "question": "How many employees were working at Bank of Ceylon at the end of 2025?",
+      "answer": "8,912",
+      "context": "Bank of Ceylon Annual Report 2025",
+      "source": "boc25.pdf",
+      "company": "Bank of Ceylon",
+      "category": "bank_financials",
+      "financial_metric": "employee_count"
+    },
+    {
+      "id": "jkh_revenue_val",
+      "question": "What was John Keells Holdings' Group revenue including associates for the 2024/25 financial year?",
+      "answer": "Rs. 354,829 million",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "revenue"
+    },
+    {
+      "id": "jkh_ebitda_val",
+      "question": "What was JKH's Group recurring EBITDA for 2024/25?",
+      "answer": "Rs. 45,689 million",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "ebitda"
+    },
+    {
+      "id": "jkh_pat_val",
+      "question": "What was the Group recurring Profit After Tax (PAT) for JKH in 2024/25?",
+      "answer": "Rs. 6,763 million",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "net_income"
+    },
+    {
+      "id": "jkh_rights_val",
+      "question": "How much capital was raised by JKH through its Rights Issue in October 2024?",
+      "answer": "Rs. 24.04 billion",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "capital_raising"
+    },
+    {
+      "id": "jkh_shares_val",
+      "question": "What was the total number of ordinary shares in issue for JKH after the subdivision in October 2024?",
+      "answer": "16,528,995,520 shares",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "share_capital"
+    },
+    {
+      "id": "jkh_roce_val",
+      "question": "What was JKH's Group Return on Capital Employed (ROCE) for 2024/25?",
+      "answer": "5.1%",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "roce"
+    },
+    {
+      "id": "jkh_debt_equity_val",
+      "question": "What was JKH's net debt to equity ratio (including leases) as of March 31, 2025?",
+      "answer": "34.9%",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "debt_to_equity"
+    },
+    {
+      "id": "jkh_transport_ebitda",
+      "question": "What was the recurring EBITDA of JKH's Transportation industry group in 2024/25?",
+      "answer": "Rs. 7,318 million",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "segment_ebitda"
+    },
+    {
+      "id": "jkh_food_ebitda",
+      "question": "What was the recurring EBITDA of JKH's Consumer Foods industry group in 2024/25?",
+      "answer": "Rs. 6,684 million",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "segment_ebitda"
+    },
+    {
+      "id": "jkh_retail_ebitda",
+      "question": "What was the recurring EBITDA of JKH's Retail industry group in 2024/25?",
+      "answer": "Rs. 10,944 million",
+      "context": "JKH Annual Report 2024/25",
+      "source": "jkh24:25.pdf",
+      "company": "John Keells Holdings",
+      "category": "conglomerate_financials",
+      "financial_metric": "segment_ebitda"
+    },
+    {
+      "id": "vone_pat_val",
+      "question": "What was Vallibel One's Group Profit After Tax for the financial year 2024/25?",
+      "answer": "LKR 16.02 billion",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "net_income"
+    },
+    {
+      "id": "vone_revenue_val",
+      "question": "What was the Gross Revenue (Economic Value Generated) of Vallibel One in 2024/25?",
+      "answer": "LKR 136.8 billion",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "revenue"
+    },
+    {
+      "id": "vone_govt_pay_val",
+      "question": "How much did Vallibel One pay to the Government in 2024/25?",
+      "answer": "LKR 24.9 billion",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "tax_paid"
+    },
+    {
+      "id": "vone_equity_val",
+      "question": "What were Vallibel One's total shareholders' funds as of March 31, 2025?",
+      "answer": "LKR 158 billion",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "equity"
+    },
+    {
+      "id": "vone_debt_val",
+      "question": "What was the total debt of Vallibel One as of March 31, 2025?",
+      "answer": "LKR 78 billion",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "total_debt"
+    },
+    {
+      "id": "vone_eps_val",
+      "question": "What was the Group Basic Earnings Per Share for Vallibel One in 2024/25?",
+      "answer": "10.34",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "earnings_per_share"
+    },
+    {
+      "id": "vone_company_count",
+      "question": "How many companies were in the Vallibel One Group portfolio as of 2024/25?",
+      "answer": "57",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "group_structure"
+    },
+    {
+      "id": "vone_stated_capital_val",
+      "question": "What was Vallibel One's stated capital as of March 31, 2025?",
+      "answer": "LKR 29,337 million",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "share_capital"
+    },
+    {
+      "id": "vone_dividend_payout",
+      "question": "What was the total value distributed to shareholders and lenders by Vallibel One in 2024/25?",
+      "answer": "LKR 8.0 billion",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "conglomerate_financials",
+      "financial_metric": "dividends_and_interest"
+    },
+    {
+      "id": "vone_finance_npl",
+      "question": "What was the Non-Performing Loan (NPL) ratio for Vallibel One's Finance sector in 2024/25?",
+      "answer": "2.25%",
+      "context": "Vallibel One Annual Report 2024/25",
+      "source": "vone24:25.pdf",
+      "company": "Vallibel One",
+      "category": "financial_services",
+      "financial_metric": "npl_ratio"
+    },
+    {
+      "id": "amw_gross_loans_val",
+      "question": "What was AMW Capital Leasing's total gross amount of loans and advances as of December 31, 2025?",
+      "answer": "Rs. 11,796 million",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "gross_loans"
+    },
+    {
+      "id": "amw_impairment_val",
+      "question": "What was the total allowance for impairment for AMW Capital Leasing in 2025?",
+      "answer": "Rs. 701 million",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "impairment_allowance"
+    },
+    {
+      "id": "amw_cash_val",
+      "question": "What was the cash and bank balance for AMW Capital Leasing as of year-end 2025?",
+      "answer": "Rs. 582,546,077",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "cash_and_bank"
+    },
+    {
+      "id": "amw_npl_val",
+      "question": "What was the Non-Performing portfolio percentage for AMW Capital Leasing in 2025?",
+      "answer": "7.35%",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "npl_ratio"
+    },
+    {
+      "id": "amw_debt_inst_val",
+      "question": "What was the value of debt instruments at amortised cost for AMW Capital Leasing in 2025?",
+      "answer": "Rs. 257,302,371",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "investments"
+    },
+    {
+      "id": "amw_vehicle_exp",
+      "question": "What were the total vehicle running expenses for AMW Capital Leasing in 2025?",
+      "answer": "Rs. 20,548,040",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "administrative_expenses"
+    },
+    {
+      "id": "amw_rent_exp",
+      "question": "How much did AMW Capital Leasing spend on rent and utilities in 2025?",
+      "answer": "Rs. 47,094,227",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "administrative_expenses"
+    },
+    {
+      "id": "amw_auditor_name",
+      "question": "Which firm performed the audit for AMW Capital Leasing's 2025 financial statements?",
+      "answer": "Deloitte Partners",
+      "context": "AMW Financial Statements 2025",
+      "source": "amw25.pdf",
+      "company": "AMW Capital Leasing",
+      "category": "financial_services",
+      "financial_metric": "audit_opinion"
+    },
+    {
+      "id": "agalawatte_revenue_12m",
+      "question": "What was the total revenue for Agalawatte Plantations for the twelve months ended December 31, 2025?",
+      "answer": "Rs. 4,936,131,000",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "revenue"
+    },
+    {
+      "id": "agalawatte_cos_12m",
+      "question": "What was the cost of sales for Agalawatte Plantations for the twelve months ended December 31, 2025?",
+      "answer": "Rs. 3,891,103,000",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "cost_of_sales"
+    },
+    {
+      "id": "agalawatte_high_price",
+      "question": "What was the highest market price per share for Agalawatte Plantations during 2025?",
+      "answer": "Rs. 69.00",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "share_price"
+    },
+    {
+      "id": "agalawatte_closing_price",
+      "question": "What was the closing market price per share for Agalawatte Plantations as of December 31, 2025?",
+      "answer": "Rs. 53.00",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "share_price"
+    },
+    {
+      "id": "agalawatte_ord_shares",
+      "question": "How many ordinary shares were in issue for Agalawatte Plantations as of December 31, 2025?",
+      "answer": "156,250,000",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "share_capital"
+    },
+    {
+      "id": "agalawatte_golden_share",
+      "question": "How many Golden Shares were in issue for Agalawatte Plantations in 2025?",
+      "answer": "1",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "share_capital"
+    },
+    {
+      "id": "agalawatte_rev_growth",
+      "question": "What was the 12-month revenue growth percentage for Agalawatte Plantations in 2025?",
+      "answer": "1.99%",
+      "context": "Agalawatte Interim Financial Statements 2025",
+      "source": "AGALAWATTEPLANTATIONS25.pdf",
+      "company": "Agalawatte Plantations",
+      "category": "agriculture_financials",
+      "financial_metric": "revenue_growth"
+    },
+    {
+      "id": "dockyard_loss_before_tax",
+      "question": "What was Colombo Dockyard's Profit/(Loss) before Tax for the twelve-month period ended December 31, 2025?",
+      "answer": "LKR (2,215,661,000) [Loss]",
+      "context": "Colombo Dockyard Interim Financial Statements 2025",
+      "source": "dockyard25.pdf",
+      "company": "Colombo Dockyard",
+      "category": "industrial_financials",
+      "financial_metric": "profit_before_tax"
+    },
+    {
+      "id": "dockyard_net_loss_val",
+      "question": "What was the total Profit/(Loss) for the period for Colombo Dockyard for the twelve months ended December 31, 2025?",
+      "answer": "LKR (2,255,912,000) [Loss]",
+      "context": "Colombo Dockyard Interim Financial Statements 2025",
+      "source": "dockyard25.pdf",
+      "company": "Colombo Dockyard",
+      "category": "industrial_financials",
+      "financial_metric": "net_income"
+    },
+    {
+      "id": "dockyard_finance_exp",
+      "question": "What were the total finance expenses for Colombo Dockyard in 2025?",
+      "answer": "LKR 2,091,045,000",
+      "context": "Colombo Dockyard Interim Financial Statements 2025",
+      "source": "dockyard25.pdf",
+      "company": "Colombo Dockyard",
+      "category": "industrial_financials",
+      "financial_metric": "finance_costs"
+    },
+    {
+      "id": "dockyard_tax_exp",
+      "question": "What was the income tax expense/reversal reported by Colombo Dockyard for the twelve months of 2025?",
+      "answer": "LKR (40,251,000) [Expense]",
+      "context": "Colombo Dockyard Interim Financial Statements 2025",
+      "source": "dockyard25.pdf",
+      "company": "Colombo Dockyard",
+      "category": "industrial_financials",
+      "financial_metric": "income_tax"
+    },
+    {
+      "id": "dockyard_errata_date",
+      "question": "On what date was the Colombo Dockyard errata letter regarding its 2025 interim financial statements issued?",
+      "answer": "04th March 2026",
+      "context": "Colombo Dockyard Interim Financial Statements 2025",
+      "source": "dockyard25.pdf",
+      "company": "Colombo Dockyard",
+      "category": "industrial_financials",
+      "financial_metric": "reporting_date"
+    }
+  ]
+}
