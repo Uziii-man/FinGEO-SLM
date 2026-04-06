@@ -53,9 +53,9 @@ runtime.num_train_epochs = 3          # Epochs
 
 ### Step 4: Evaluate
 
-1. Open `03_evaluation_and_benchmarking.ipynb`
+1. Open `03_retrieval_evaluation.ipynb`
 2. Run all cells
-3. Review benchmarks and visualizations
+3. Review retrieval benchmarks and visualizations
 
 ---
 
@@ -147,9 +147,10 @@ fingeo_slm_outputs/
 ## Next Steps
 
 After training:
-1. Run `03_evaluation_and_benchmarking.ipynb` for evaluation
-2. Run `04_geo_search_query.ipynb` for RAG demo
-3. Run `05_logical_reasoning_benchmark.ipynb` for reasoning tests
-4. Download model to permanent storage
+1. Run `03_retrieval_evaluation.ipynb` for retrieval evaluation
+2. Run `04_model_comparison_and_ablation.ipynb` for model comparison & ablation
+3. Run `05_geo_search_query.ipynb` for geo search demo
+4. Run `06_logical_reasoning_benchmark.ipynb` for reasoning tests
+5. Download model to permanent storage
 
 See [THESIS_GUIDE.md](THESIS_GUIDE.md) for academic workflow.

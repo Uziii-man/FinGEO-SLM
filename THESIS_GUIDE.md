@@ -206,9 +206,9 @@ Use for **Chapter 3: Methodology â†’ Model Training** and **Chapter 4: Results â
 
 ## Phase 3: Evaluation
 
-### Notebook 03: Evaluation and Benchmarking
+### Notebook 03: Retrieval Evaluation & Benchmarking
 
-**Objective:** Comprehensive performance evaluation with multiple metrics.
+**Objective:** Set up the evaluation pipeline with retrieval, model loading, and initial benchmarks.
 
 #### Evaluation Metrics
 
@@ -569,7 +569,8 @@ cat > thesis_results/REPRODUCIBILITY.md << 'EOF'
 3. Install dependencies: `pip install -r requirements.txt`
 4. Run notebook 01: `jupyter notebook 01_data_collection_and_preprocessing.ipynb`
 5. Run notebook 02 with config: [specify exact cell configurations]
-6. Run notebook 03: [specify test set size]
+6. Run notebook 03 (`03_retrieval_evaluation.ipynb`): [specify test set size]
+7. Run notebook 04 (`04_model_comparison_and_ablation.ipynb`): [specify ablation configurations]
 
 ## Random Seeds
 - Global seed: 42
@@ -601,8 +602,8 @@ EOF
 - [ ] Day 6-7: Train production model (Phi-3/Mistral)
 
 ### Week 3: Evaluation and Ablations
-- [ ] Day 1-2: Run comprehensive evaluation (notebook 03)
-- [ ] Day 3-5: Ablation studies (data size, model size)
+- [ ] Day 1-2: Run retrieval evaluation (notebook 03) and model comparison/ablations (notebook 04)
+- [ ] Day 3-5: Additional ablation studies (data size, model size)
 - [ ] Day 6-7: RAG configuration experiments
 
 ### Week 4: Analysis and Documentation
@@ -636,10 +637,16 @@ Ready to start? Follow this checklist:
 - [ ] Document results
 
 **Step 4: First Evaluation (1 hour)**
-- [ ] Open notebook 03
+- [ ] Open notebook 03 (`03_retrieval_evaluation.ipynb`)
 - [ ] Run on 50 test samples
 - [ ] Review all metrics
 - [ ] Save comparison charts
+
+**Step 4b: Model Comparison & Ablation (1 hour)**
+- [ ] Open notebook 04 (`04_model_comparison_and_ablation.ipynb`)
+- [ ] Run comparative evaluation
+- [ ] Review ablation study results
+- [ ] Save dashboard visualizations
 
 **Step 5: Plan Full Experiments (planning)**
 - [ ] Decide on model configurations

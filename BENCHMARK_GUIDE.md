@@ -6,7 +6,7 @@ This guide explains the comprehensive 100-question benchmark added to **Notebook
 
 ## 📊 Overview
 
-**File**: `04_geo_search_query.ipynb` (new section at end)  
+**File**: `05_geo_search_query.ipynb` (new section at end)  
 **Dataset**: `data/benchmark_questions_100.json` (100 questions, version 2.0)  
 **Output**: `benchmark_results_100q.png` (4-panel visualization)
 
@@ -55,9 +55,9 @@ The benchmark evaluates:
 
 ## 🚀 Running the Benchmark
 
-### 1. Open Notebook 04
+### 1. Open Notebook 05
 ```bash
-jupyter notebook 04_geo_search_query.ipynb
+jupyter notebook 05_geo_search_query.ipynb
 ```
 
 ### 2. Locate Benchmark Section
@@ -237,8 +237,8 @@ retrieved_docs = bm25_retriever.invoke(query)[:10]  # Instead of [:5]
 
 | Benchmark | Location | Questions | Purpose |
 |-----------|----------|-----------|---------|
-| **100-Q Benchmark** | Notebook 04 | 103 | Large-scale retrieval evaluation |
-| **Logical Reasoning** | Notebook 03 | 5 | Chain-of-thought CoT evaluation |
+| **100-Q Benchmark** | Notebook 05 | 103 | Large-scale retrieval evaluation |
+| **Logical Reasoning** | Notebook 06 | 20 | Chain-of-thought CoT evaluation |
 | **FinQA Train/Dev** | Notebook 01 | Thousands | Model training/validation |
 
 The 100-Q benchmark is specifically for **thesis evaluation** - showing your RAG system performs well across diverse financial questions.

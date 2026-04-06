@@ -147,12 +147,12 @@ pip install nbconvert
 # Convert notebooks to Python
 jupyter nbconvert --to script 01_data_collection_and_preprocessing.ipynb
 jupyter nbconvert --to script 02_model_optimization_and_training.ipynb
-jupyter nbconvert --to script 03_evaluation_and_benchmarking.ipynb
+jupyter nbconvert --to script 03_retrieval_evaluation.ipynb
 
 # Run the scripts
 python 01_data_collection_and_preprocessing.py
 python 02_model_optimization_and_training.py
-python 03_evaluation_and_benchmarking.py
+python 03_retrieval_evaluation.py
 ```
 
 ### Option C: Use VS Code Remote SSH
@@ -165,8 +165,10 @@ python 03_evaluation_and_benchmarking.py
 
 1. `01_data_collection_and_preprocessing.ipynb` - Prepare datasets (~5 min)
 2. `02_model_optimization_and_training.ipynb` - Train model (~30-120 min)
-3. `03_evaluation_and_benchmarking.ipynb` - Evaluate performance (~15 min)
-4. `04_geo_search_query.ipynb` - Optional RAG demo
+3. `03_retrieval_evaluation.ipynb` - Evaluate retrieval & benchmarks (~15 min)
+4. `04_model_comparison_and_ablation.ipynb` - Model comparison & ablation studies (~30 min)
+5. `05_geo_search_query.ipynb` - Optional geo search demo
+6. `06_logical_reasoning_benchmark.ipynb` - Optional reasoning benchmark
 
 ## Configuration for Vast.ai
 

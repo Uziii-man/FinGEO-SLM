@@ -15,7 +15,8 @@ jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 # 3. Execute notebooks in order:
 #    01 → Data preprocessing (10 min)
 #    02 → Model training (15-45 min)
-#    03 → Evaluation (30 min)
+#    03 → Retrieval evaluation (30 min)
+#    04 → Model comparison & ablation (30 min)
 ```
 
 ---
@@ -84,9 +85,10 @@ fingeo_slm_outputs/
 
 ## Next Steps
 
-1. **Evaluate**: Run notebook 03 for benchmarks
-2. **Test RAG**: Run notebook 04 for retrieval demo
-3. **Test Reasoning**: Run notebook 05 for COT evaluation
-4. **Download**: Copy model from Vast.ai to permanent storage
+1. **Evaluate**: Run notebook 03 (`03_retrieval_evaluation.ipynb`) for benchmarks
+2. **Compare Models**: Run notebook 04 (`04_model_comparison_and_ablation.ipynb`) for ablation studies
+3. **Test Geo Search**: Run notebook 05 (`05_geo_search_query.ipynb`) for retrieval demo
+4. **Test Reasoning**: Run notebook 06 (`06_logical_reasoning_benchmark.ipynb`) for COT evaluation
+5. **Download**: Copy model from Vast.ai to permanent storage
 
 See [TRAINING_GUIDE.md](TRAINING_GUIDE.md) for detailed instructions.

@@ -87,22 +87,30 @@ Execute in order:
 - RTX 4090: ~20-30 min  
 - RTX 3090: ~30-45 min
 
-### 3. Evaluation (30 min)
+### 3. Retrieval Evaluation (30 min)
 ```
-03_evaluation_and_benchmarking.ipynb
+03_retrieval_evaluation.ipynb
 ```
-- Chain-of-Thought benchmarks
-- Retrieval metrics
-- Performance analysis
+- Retrieval pipeline setup
+- TTFT/SSoV benchmarks
+- Basic visualizations
 
-### 4. Optional: RAG Demo (15 min)
+### 4. Model Comparison & Ablation (30 min)
 ```
-04_geo_search_query.ipynb
+04_model_comparison_and_ablation.ipynb
+```
+- Comparative model evaluation
+- Ablation studies
+- Comprehensive dashboard
+
+### 5. Optional: Geo Search Query (15 min)
+```
+05_geo_search_query.ipynb
 ```
 
-### 5. Optional: Reasoning Benchmark (20 min)
+### 6. Optional: Reasoning Benchmark (20 min)
 ```
-05_logical_reasoning_benchmark.ipynb
+06_logical_reasoning_benchmark.ipynb
 ```
 
 ---
