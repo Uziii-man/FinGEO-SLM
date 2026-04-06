@@ -61,11 +61,12 @@ jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 **Execution Order**:
 1. `01_data_collection_and_preprocessing.ipynb` (10 min)
 2. `02_model_optimization_and_training.ipynb` (15-45 min)
-3. `03_evaluation_and_benchmarking.ipynb` (30 min)
-4. `04_geo_search_query.ipynb` (optional, 15 min)
-5. `05_logical_reasoning_benchmark.ipynb` (optional, 20 min)
+3. `03_retrieval_evaluation.ipynb` (30 min)
+4. `04_model_comparison_and_ablation.ipynb` (30 min)
+5. `05_geo_search_query.ipynb` (optional, 15 min)
+6. `06_logical_reasoning_benchmark.ipynb` (optional, 20 min)
 
-**Total Time**: ~1-2 hours | **Cost**: $0.60-1.20
+**Total Time**: ~1.5-2.5 hours | **Cost**: $0.60-1.20
 
 📖 **Full Setup Guide**: [SETUP_VASTAI.md](SETUP_VASTAI.md)
 
@@ -78,23 +79,31 @@ FinGEO-SLM/
 ├── 📓 Notebooks
 │   ├── 01_data_collection_and_preprocessing.ipynb
 │   ├── 02_model_optimization_and_training.ipynb
-│   ├── 03_evaluation_and_benchmarking.ipynb
-│   ├── 04_geo_search_query.ipynb
-│   └── 05_logical_reasoning_benchmark.ipynb
+│   ├── 03_retrieval_evaluation.ipynb
+│   ├── 04_model_comparison_and_ablation.ipynb
+│   ├── 05_geo_search_query.ipynb
+│   └── 06_logical_reasoning_benchmark.ipynb
 │
 ├── 📚 Data
-│   └── data/finQA/
+│   ├── data/finQA/
+│   └── processed_data/
 │
 ├── ⚙️ Configuration
 │   ├── requirements.txt
 │   ├── setup.sh
-│   └── gpu_utils.py
+│   ├── gpu_utils.py
+│   └── configs/
+│
+├── 📊 Outputs
+│   ├── fingeo_slm_outputs/
+│   └── fingeo_slm_logs/
 │
 └── 📖 Documentation
     ├── README.md
     ├── SETUP_VASTAI.md
     ├── QUICKSTART.md
     ├── TRAINING_GUIDE.md
+    ├── TRAINING_SUMMARY.md
     ├── BENCHMARK_GUIDE.md
     └── THESIS_GUIDE.md
 ```
@@ -128,8 +137,10 @@ FinGEO-SLM/
 ## 📖 Documentation
 
 - **[SETUP_VASTAI.md](SETUP_VASTAI.md)** - Vast.ai setup guide
-- **[QUICKSTART.md](QUICKSTART.md)** - 5-minute overview  
+- **[QUICKSTART.md](QUICKSTART.md)** - 5-minute overview
 - **[TRAINING_GUIDE.md](TRAINING_GUIDE.md)** - Training procedures
+- **[TRAINING_SUMMARY.md](TRAINING_SUMMARY.md)** - Training results summary
+- **[BENCHMARK_GUIDE.md](BENCHMARK_GUIDE.md)** - Benchmark procedures
 - **[THESIS_GUIDE.md](THESIS_GUIDE.md)** - Academic workflow
 
 ---
